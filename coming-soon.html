@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Coming Soon | Lynlytics</title>
     <meta name="description" content="Lynlytics is launching soon. Building something thoughtful takes time.">
     
@@ -216,9 +219,14 @@
     </div>
     
     <script>
+        // COUNTDOWN TIMER v2.0 - Updated Oct 2, 2025
         // Set fixed launch date - Update this date as needed
         // Format: Year, Month (0-11), Day, Hour, Minute, Second
-        const launchDate = new Date(2025, 9, 22, 23, 59, 59); // October 22, 2025, 11:59:59 PM (20 days from Oct 2)
+        const launchDate = new Date(2025, 9, 22, 23, 59, 59); // October 22, 2025 at 11:59:59 PM
+        
+        // Debug: Log the target date and current calculation
+        console.log('Launch Date:', launchDate.toLocaleString());
+        console.log('Days until launch:', Math.floor((launchDate - new Date()) / (1000 * 60 * 60 * 24)))
         
         function updateCountdown() {
             const now = new Date().getTime();
