@@ -216,9 +216,9 @@
     </div>
     
     <script>
-        // Set launch date to 20 days from now
-        const launchDate = new Date();
-        launchDate.setDate(launchDate.getDate() + 20);
+        // Set fixed launch date - Update this date as needed
+        // Format: Year, Month (0-11), Day, Hour, Minute, Second
+        const launchDate = new Date(2025, 11, 31, 23, 59, 59); // December 31, 2025, 11:59:59 PM
         
         function updateCountdown() {
             const now = new Date().getTime();
