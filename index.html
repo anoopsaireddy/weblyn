@@ -8,13 +8,10 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background-color: #ffffff;
             color: #0a0a0a;
             letter-spacing: -0.01em;
@@ -78,7 +75,7 @@
             opacity: 0;
         }
         .font-cyberpunk {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
         .fade-in {
             opacity: 1;
@@ -90,12 +87,10 @@
             border-bottom: 1px solid var(--soft-border);
         }
         .glass-header {
-            background: rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.95);
             backdrop-filter: saturate(180%) blur(20px);
             -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border: 1px solid rgba(0,0,0,0.08);
-            border-radius: 9999px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
         }
         .blur-heavy { /* wixui-blur-layer-like */
             background: rgba(255,255,255,0.6);
@@ -257,30 +252,28 @@
             box-shadow: 0px 40px 80px rgba(0, 0, 0, 0.2);
             border-color: rgba(0, 217, 255, 0.3);
         }
-        .faq-item {
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-            padding: 1.25rem 0;
+        .faq-item-modern {
+            border-bottom: none;
         }
-        .faq-question {
+        .faq-question-modern {
             cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            transition: color 0.2s;
-            color: #1d1d1f;
+            background: transparent;
+            border: none;
         }
-        .faq-question:hover { color: var(--primary-blue); }
-        .faq-answer {
+        .faq-question-modern:focus {
+            outline: 2px solid rgba(0, 0, 0, 0.1);
+            outline-offset: 2px;
+        }
+        .faq-answer-modern {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
-            color: #6b7280;
-            padding-top: 0;
         }
-        .faq-item.active .faq-answer { max-height: 500px; padding-top: 1rem; }
-        .faq-item.active .faq-icon { transform: rotate(180deg); }
-        .faq-icon { transition: transform 0.3s ease; }
+        .faq-item-modern.active .faq-answer-modern {
+            max-height: 800px;
+        }
+        .faq-item-modern.active .faq-icon-modern {
+            transform: rotate(45deg);
+        }
         
         /* Flow Diagram Animations */
         .flow-card {
@@ -289,7 +282,11 @@
             backdrop-filter: blur(30px) saturate(180%);
             -webkit-backdrop-filter: blur(30px) saturate(180%);
             border-radius: 24px;
-            padding: 2.5rem 2rem;
+            padding: 2.5rem 2.5rem;
+            min-width: 280px;
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
             box-shadow: 
                 0 10px 40px rgba(0,0,0,0.12),
                 0 1px 3px rgba(0,0,0,0.05),
@@ -315,7 +312,7 @@
             opacity: 1;
         }
         .flow-card:hover {
-            transform: translateY(-12px) scale(1.02) rotateX(2deg);
+            transform: translateY(-8px) rotateX(2deg);
             box-shadow: 
                 0 20px 80px rgba(0,0,0,0.18),
                 0 5px 15px rgba(0,0,0,0.08),
@@ -367,8 +364,8 @@
             background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(30px) saturate(180%);
             -webkit-backdrop-filter: blur(30px) saturate(180%);
-            border-radius: 24px;
-            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            padding: 2rem 1.75rem;
             box-shadow: 
                 0 10px 40px rgba(0,0,0,0.12),
                 0 1px 3px rgba(0,0,0,0.05),
@@ -402,10 +399,10 @@
             border-color: rgba(205, 255, 0, 0.3);
         }
         .pain-icon-wrapper {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1.5rem;
-            border-radius: 20px;
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1.25rem;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -633,19 +630,25 @@
         </div>
     </div>
 
-    <header class="fixed top-4 left-4 right-4 z-50">
+    <header class="fixed top-0 left-0 right-0 z-50">
         <div class="glass-header">
-            <nav class="flex items-center justify-between h-16 px-6">
-                <a href="#" class="text-[20px] tracking-tight font-bold" style="color: #1877F2;">Lynlytics</a>
-                <div class="hidden md:flex md:items-center md:space-x-8">
-                    <a href="#" class="text-base text-gray-700 hover:text-gray-900 transition">Product</a>
-                    <a href="#integrations" class="text-base text-gray-700 hover:text-gray-900 transition">Integrations</a>
-                    <a href="#features" class="text-base text-gray-700 hover:text-gray-900 transition">Features</a>
-                    <a href="#faq" class="text-base text-gray-700 hover:text-gray-900 transition">FAQ</a>
-                    <a href="mailto:hello@lynlytics.com" class="text-base text-gray-700 hover:text-gray-900 transition">Contact Us</a>
-                </div>
+            <div class="flex items-center justify-between h-[72px] px-6 md:px-8 max-w-7xl mx-auto">
+                <!-- Left: Logo -->
+                <a href="#" class="text-[22px] tracking-tight font-bold transition-colors hover:text-blue-600" style="color: #1877F2;">Lynlytics</a>
+                
+                <!-- Center: Navigation -->
+                <nav class="hidden md:flex md:items-center md:space-x-10">
+                    <a href="#" class="text-[15px] font-medium text-gray-700 hover:text-gray-900 transition-colors">Product</a>
+                    <a href="#integrations" class="text-[15px] font-medium text-gray-700 hover:text-gray-900 transition-colors">Integrations</a>
+                    <a href="#features" class="text-[15px] font-medium text-gray-700 hover:text-gray-900 transition-colors">Features</a>
+                    <a href="#faq" class="text-[15px] font-medium text-gray-700 hover:text-gray-900 transition-colors">FAQ</a>
+                    <a href="mailto:hello@lynlytics.com" class="text-[15px] font-medium text-gray-700 hover:text-gray-900 transition-colors">Contact Us</a>
+                    <a href="team.html" class="text-[15px] font-medium text-gray-700 hover:text-gray-900 transition-colors">Team</a>
+                </nav>
+                
+                <!-- Right: CTA Button -->
                 <div class="flex items-center gap-4">
-                    <a href="coming-soon.html" class="hidden md:inline-block magnetic-btn px-4 py-2 rounded-full bg-black text-white text-sm font-medium ring-hover">Get started</a>
+                    <a href="coming-soon.html" class="hidden md:inline-flex items-center magnetic-btn px-5 py-2.5 rounded-full text-white text-[14px] font-semibold hover:opacity-90 transition-all duration-200" style="background-color: #1877F2;">Get started</a>
                     <!-- Mobile Menu Button -->
                     <button class="mobile-menu-button" id="mobile-menu-btn" aria-label="Open menu">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -653,33 +656,27 @@
                         </svg>
                     </button>
                 </div>
-            </nav>
+            </div>
         </div>
     </header>
 
     <main>
 
         <section class="relative min-h-[90vh] flex items-center justify-center pt-24 px-4 overflow-hidden bg-slate-50">
-            <!-- Animated Gradient Mesh -->
-            <div class="gradient-mesh">
-                <div class="mesh-blob blob-1"></div>
-                <div class="mesh-blob blob-2"></div>
-                <div class="mesh-blob blob-3"></div>
-            </div>
             
-            <div class="max-w-4xl mx-auto text-center relative z-10">
-                <h1 class="text-[min(11vw,56px)] md:text-[min(7vw,72px)] font-extrabold text-gray-900 leading-[1.05]">
-                    <span class="text-reveal">Stop Drowning in Data.</span><br>
-                    <span class="text-reveal">Activate Your <span class="gradient-text">Actionable</span></span><br>
-                    <span class="text-reveal"><span class="gradient-text">Intelligence Engine.</span></span>
+            <div class="max-w-5xl mx-auto text-center relative z-10">
+                <h1 class="text-[2.75rem] md:text-[3.5rem] font-semibold text-gray-900 leading-[1.15] mb-6">
+                    Meet <span class="gradient-text">Lyn,</span> your personal<br><span class="gradient-text">AI-Powered Business Analyst.</span>
                 </h1>
-                <div class="mt-6 text-[clamp(18px,1.6vw,22px)] text-gray-600 max-w-3xl mx-auto font-cyberpunk">
-                    <div>Lynlytics is the business intelligence engine built for SMBs like</div>
-                    <div id="smb-animation" class="gradient-violet">e-commerce sites</div>
-                    <div>delivering AI-powered micro-analytics and a clear action plan for the week. We find the insights, so you can drive the growth.</div>
-                </div>
+                <p class="mt-6 text-[1.0625rem] md:text-[1.125rem] text-gray-600 max-w-3xl mx-auto leading-[1.7] font-normal">
+                    Lyn is the AI analyst at the heart of Lynlytics, built to learn the unique context of your company. Lyn finds the deep, micro-analytic insights that dashboards simply cannot provide and advises you on the exact steps to take next to improve your business.
+                </p>
                 <div class="mt-10">
-                    <a href="coming-soon.html" class="magnetic-btn px-8 py-4 rounded-full bg-black text-white font-semibold text-lg ring-hover inline-block">Start Now</a>
+                    <a href="coming-soon.html" class="magnetic-btn px-8 py-4 rounded-full bg-black text-white font-medium text-base ring-hover inline-block">Start Working with Lyn</a>
+                </div>
+                <div class="mt-12 text-[1.125rem] md:text-[1.25rem] text-gray-600 font-normal">
+                    <span>The intelligence engine for modern SMB's like </span>
+                    <span id="smb-animation" class="gradient-violet font-medium">Creative Agencies</span>
                 </div>
             </div>
         </section>
@@ -691,47 +688,48 @@
             </svg>
         </div>
 
-        <section class="px-4 py-24 bg-white">
+        <!-- Section 2: Dashboards Don't Run a Business -->
+        <section class="px-4 py-24 bg-slate-50">
             <div class="max-w-6xl mx-auto">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900">
-                        <span class="gradient-text">Dashboards Don't Run a Business.</span> Actions Do.
-                    </h2>
+                <!-- Heading -->
+                <div class="text-center max-w-4xl mx-auto mb-16">
+                    <h2 class="text-[2.5rem] md:text-[3rem] font-semibold text-gray-900 leading-[1.15] mb-6">Dashboards Don't Run a<br><span class="gradient-text">Business. Actions Do.</span></h2>
+                    <p class="text-[1.0625rem] md:text-[1.125rem] text-gray-600 leading-[1.7] font-normal">You're overloaded with charts that show you what happened, but leave you guessing why. Lynlytics is designed to break this cycle. Your AI analyst, Lyn, doesn't just report on the past; it delivers the clarity and direction you need to move your business forward in three key ways:</p>
                 </div>
 
-                <!-- Pain Point Cards -->
-                <div class="grid md:grid-cols-3 gap-8 mt-12">
-                    <!-- Card 1: Drowning in Charts -->
+                <!-- Cards Grid -->
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
                     <div class="pain-card">
                         <div class="pain-icon-wrapper" style="background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);">
-                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Drowning in Charts</h3>
-                        <p class="text-gray-600 leading-relaxed font-cyberpunk">Endless dashboards show you what happened, but leave you guessing about what to do next.</p>
+                        <h3 class="text-lg font-bold text-gray-900 mb-3">Finds the Hidden Insights</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed font-normal">Lyn proactively monitors your business 24/7 and goes beyond dashboards to find the deep, cross-source micro analytic insights and explains the why behind your numbers.</p>
                     </div>
 
-                    <!-- Card 2: No Clear Direction -->
+                    <!-- Card 2 -->
                     <div class="pain-card">
                         <div class="pain-icon-wrapper" style="background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);">
-                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">No Clear Direction</h3>
-                        <p class="text-gray-600 leading-relaxed font-cyberpunk">Hours spent analyzing data, yet you're still uncertain which actions will actually move the needle.</p>
+                        <h3 class="text-lg font-bold text-gray-900 mb-3">Builds Your Weekly Action Plan</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed font-normal">Lyn transforms the most critical insights into your weekly action plan. Each advice is a clear recipe with step-by-step guidance, turning complex analysis into confident execution.</p>
                     </div>
 
-                    <!-- Card 3: Wasted Money -->
+                    <!-- Card 3 -->
                     <div class="pain-card">
                         <div class="pain-icon-wrapper" style="background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);">
-                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Wasted Money</h3>
-                        <p class="text-gray-600 leading-relaxed font-cyberpunk">Complex tools with features you barely use, draining your budget without delivering real value.</p>
+                        <h3 class="text-lg font-bold text-gray-900 mb-3">Lyn is always active</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed font-normal">Lyn is your personal analyst, available 24/7 interacting with you. Ask complex business questions in plain English and get immediate, data-backed answers and strategic advice, all in a simple chat.</p>
                     </div>
                 </div>
             </div>
@@ -744,27 +742,26 @@
             </svg>
         </div>
 
-        <section class="px-4 py-24 bg-slate-50">
+        <!-- Section 3: From Raw Data to Your Action Plan -->
+        <section class="px-4 py-24 bg-white">
             <div class="max-w-6xl mx-auto">
                 <!-- Heading -->
                 <div class="text-center max-w-4xl mx-auto mb-20">
-                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900">Lynlytics: The <span class="gradient-text">Active Intelligence System</span> for Your Business.</h2>
-                    <p class="mt-6 text-xl text-gray-600 font-cyberpunk">
-                        Lynlytics is different. We believe you don't need another passive dashboard; you need an active intelligence system designed for <b>SMBs</b>. Our engine works for you 24/7, connecting to your disparate data sources to find the hidden opportunities and risks. It then translates that complex analysis into a simple, prioritized action plan designed to make a measurable impact.
-                    </p>
+                    <h2 class="text-[2.5rem] md:text-[3rem] font-semibold text-gray-900 leading-[1.15] mb-6">From Raw Data to <span class="gradient-text">Your Action Plan</span></h2>
+                    <p class="text-[1.0625rem] md:text-[1.125rem] text-gray-600 leading-[1.7] font-normal">Our process is designed to be simple for you on the outside and powerful on the inside. We turn your scattered data into a clear plan in three automated steps.</p>
                 </div>
 
                 <!-- Flow Diagram -->
-                <div class="grid md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-8 items-center max-w-5xl mx-auto">
-                    <!-- Stage 1: Data Sources -->
+                <div class="grid md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-10 items-center max-w-6xl mx-auto">
+                    <!-- Step 1 -->
                     <div class="flow-card">
                         <div class="gradient-icon" style="background: linear-gradient(135deg, #ef4444, #f97316);">
                             <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Your Data</h3>
-                        <p class="text-sm text-gray-600 font-cyberpunk">Multiple sources, scattered insights, complex patterns</p>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Connect your Data</h3>
+                        <p class="text-sm text-gray-600 font-normal">Multiple sources, scattered insights, complex patterns</p>
                     </div>
 
                     <!-- Arrow 1 -->
@@ -774,15 +771,15 @@
                         </svg>
                     </div>
 
-                    <!-- Stage 2: AI Agents -->
+                    <!-- Step 2 -->
                     <div class="flow-card">
                         <div class="gradient-icon" style="background: linear-gradient(135deg, #6aa7ff, #da67cf);">
                             <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">AI Agents</h3>
-                        <p class="text-sm text-gray-600 font-cyberpunk">24/7 analysis, pattern recognition, insight generation</p>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Lyn Finds the Insights</h3>
+                        <p class="text-sm text-gray-600 font-normal">24/7 analysis, pattern recognition, insight generation</p>
                     </div>
 
                     <!-- Arrow 2 -->
@@ -792,15 +789,15 @@
                         </svg>
                     </div>
 
-                    <!-- Stage 3: Action Plan -->
+                    <!-- Step 3 -->
                     <div class="flow-card">
                         <div class="gradient-icon" style="background: linear-gradient(135deg, #10b981, #06b6d4);">
                             <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Action Plan</h3>
-                        <p class="text-sm text-gray-600 font-cyberpunk">Clear priorities, step-by-step guidance, measurable impact</p>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">You Get a Clear Plan</h3>
+                        <p class="text-sm text-gray-600 font-normal">Clear priorities, step-by-step guidance, measurable impact</p>
                     </div>
                 </div>
             </div>
@@ -936,63 +933,142 @@
                     <h2 class="text-5xl md:text-6xl font-bold text-gray-900">Everything you need to <span class="gradient-text">take control</span></h2>
                     <p class="mt-5 text-xl text-gray-600 font-cyberpunk">Crystal-clear insights, prioritized actions, and beautiful clarity across your numbers.</p>
                 </div>
-                <!-- Feature 1 -->
-                <div class="grid md:grid-cols-[35%_65%] gap-16 items-center px-4 py-16">
+
+                <!-- Interactive Showcase Section -->
+                <!-- Feature 1: Chat with Lyn -->
+                <div class="relative px-4 py-10 mb-12">
+                    <div class="max-w-[1600px] mx-auto">
+                        <div class="relative bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 rounded-[2rem] p-12 md:p-20 overflow-hidden shadow-2xl border border-white/50" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-orange-400/20 to-amber-400/20 rounded-full blur-3xl"></div>
+                            <div class="absolute bottom-0 left-0 w-[450px] h-[450px] bg-gradient-to-tr from-yellow-400/20 to-orange-400/20 rounded-full blur-3xl"></div>
+                            
+                            <div class="relative z-10 grid md:grid-cols-[30%_70%] gap-16 items-center">
                     <div>
-                        <h2 class="text-4xl md:text-5xl font-bold text-gray-900">Weekly Business Report</h2>
-                        <p class="mt-5 text-xl text-gray-600 font-cyberpunk">Every Monday, receive a concise executive summary of your business performance. We highlight your biggest wins and the most critical areas needing your attention, so you always know where to focus.</p>
+                                    <h2 class="text-[2rem] md:text-[2.25rem] font-semibold text-gray-900 mb-5 leading-[1.15] tracking-tight">Chat with Lyn</h2>
+                                    <p class="text-[0.95rem] md:text-[1rem] text-gray-600 leading-[1.65] font-normal">Your personal AI analyst is available 24/7. Ask complex questions about your business in plain English like "Which ad campaign was most profitable last week?" and get immediate, data-backed answers and suggestions, without ever waiting for a report to be built.</p>
                     </div>
-                    <div>
-                        <div class="aspect-[21/10] bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl image-frame elevate">
-                            <img src="./assets/feature-report.png" alt="Weekly Business Report" class="w-full h-full object-cover" onerror="this.style.display='none'">
+                                <div class="relative">
+                                    <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform hover:scale-[1.01] transition-transform duration-500">
+                                        <div class="aspect-[20/9] relative flex items-center justify-center p-2">
+                                            <!-- Blurred background -->
+                                            <div class="absolute inset-0 bg-cover bg-center blur-2xl opacity-40" style="background-image: url('./assets/feature-chat.png');"></div>
+                                            <!-- Sharp image on top -->
+                                            <img src="./assets/feature-chat.png" alt="Chat with Lyn" class="relative z-10 w-full h-full object-contain" onerror="this.style.display='none'">
+                                        </div>
+                                    </div>
+                                    <div class="absolute -bottom-5 -left-5 w-28 h-28 bg-gradient-to-br from-orange-400 to-amber-500 rounded-full blur-3xl opacity-50 animate-pulse"></div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Feature 2: Weekly Business Report -->
+                <div class="relative px-4 py-10 mb-12">
+                    <div class="max-w-[1600px] mx-auto">
+                        <div class="relative bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 rounded-[2rem] p-12 md:p-20 overflow-hidden shadow-2xl border border-white/50" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl"></div>
+                            <div class="absolute bottom-0 left-0 w-[450px] h-[450px] bg-gradient-to-tr from-pink-400/20 to-orange-400/20 rounded-full blur-3xl"></div>
+                            
+                            <div class="relative z-10 grid md:grid-cols-[30%_70%] gap-16 items-center">
+                    <div>
+                                    <h2 class="text-[2rem] md:text-[2.25rem] font-semibold text-gray-900 mb-5 leading-[1.15] tracking-tight">Weekly Business Report</h2>
+                                    <p class="text-[0.95rem] md:text-[1rem] text-gray-600 leading-[1.65] font-normal">Every Monday, receive a concise executive summary of your business performance. We highlight your biggest wins and the most critical areas needing your attention, so you always know where to focus.</p>
+                        </div>
+                                <div class="relative">
+                                    <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform hover:scale-[1.01] transition-transform duration-500">
+                                        <div class="aspect-[20/9] relative flex items-center justify-center p-2">
+                                            <!-- Blurred background -->
+                                            <div class="absolute inset-0 bg-cover bg-center blur-2xl opacity-40" style="background-image: url('./assets/feature-report.png');"></div>
+                                            <!-- Sharp image on top -->
+                                            <img src="./assets/feature-report.png" alt="Weekly Business Report" class="relative z-10 w-full h-full object-contain" onerror="this.style.display='none'">
             </div>
             </div>
+                                    <div class="absolute -bottom-5 -left-5 w-28 h-28 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full blur-3xl opacity-50 animate-pulse"></div>
+            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Feature 2 -->
-                <div class="grid md:grid-cols-[35%_65%] gap-16 items-center px-4 py-16">
+                <div class="relative px-4 py-10 mb-12">
+                    <div class="max-w-[1600px] mx-auto">
+                        <div class="relative bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 rounded-[2rem] p-12 md:p-20 overflow-hidden shadow-2xl border border-white/50" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-green-400/20 to-emerald-400/20 rounded-full blur-3xl"></div>
+                            <div class="absolute bottom-0 left-0 w-[450px] h-[450px] bg-gradient-to-tr from-teal-400/20 to-cyan-400/20 rounded-full blur-3xl"></div>
+                            
+                            <div class="relative z-10 grid md:grid-cols-[30%_70%] gap-16 items-center">
                     <div>
-                        <h2 class="text-4xl md:text-5xl font-bold text-gray-900">Business Pulse</h2>
-                        <p class="mt-5 text-xl text-gray-600 font-cyberpunk">Get a clean, minimalist view of your core metrics like Revenue, Profit Margin, AOV all in one place. With a reliable forecast, you'll have the situational awareness you need to never fly blind again.</p>
+                                    <h2 class="text-[2rem] md:text-[2.25rem] font-semibold text-gray-900 mb-5 leading-[1.15] tracking-tight">Business Pulse</h2>
+                                    <p class="text-[0.95rem] md:text-[1rem] text-gray-600 leading-[1.65] font-normal">Get a clean, minimalist view of your core metrics like Revenue, Profit Margin, AOV all in one place. With a reliable forecast, you'll have the situational awareness you need to never fly blind again.</p>
                         </div>
-                    <div>
-                         <div class="aspect-[21/10] bg-gradient-to-br from-green-50 to-green-100 rounded-2xl image-frame elevate">
-                            <img src="./assets/feature-finance.png" alt="Business Pulse" class="w-full h-full object-cover" onerror="this.style.display='none'">
+                                <div class="relative">
+                                    <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform hover:scale-[1.01] transition-transform duration-500">
+                                        <div class="aspect-[20/9] relative flex items-center justify-center p-2">
+                                            <!-- Blurred background -->
+                                            <div class="absolute inset-0 bg-cover bg-center blur-2xl opacity-40" style="background-image: url('./assets/feature-finance.png');"></div>
+                                            <!-- Sharp image on top -->
+                                            <img src="./assets/feature-finance.png" alt="Business Pulse" class="relative z-10 w-full h-full object-contain" onerror="this.style.display='none'">
+                                        </div>
+                                    </div>
+                                    <div class="absolute -bottom-5 -left-5 w-28 h-28 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full blur-3xl opacity-50 animate-pulse"></div>
+                                </div>
+                            </div>
                     </div>
                         </div>
                     </div>
                 <!-- Feature 3 -->
-                <div class="grid md:grid-cols-[35%_65%] gap-16 items-center px-4 py-16">
+                <div class="relative px-4 py-10 mb-12">
+                    <div class="max-w-[1600px] mx-auto">
+                        <div class="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-violet-50 rounded-[2rem] p-12 md:p-20 overflow-hidden shadow-2xl border border-white/50" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-blue-400/20 to-indigo-400/20 rounded-full blur-3xl"></div>
+                            <div class="absolute bottom-0 left-0 w-[450px] h-[450px] bg-gradient-to-tr from-violet-400/20 to-purple-400/20 rounded-full blur-3xl"></div>
+                            
+                            <div class="relative z-10 grid md:grid-cols-[30%_70%] gap-16 items-center">
                     <div>
-                        <h2 class="text-4xl md:text-5xl font-bold text-gray-900">Quick Insights</h2>
-                        <p class="mt-5 text-xl text-gray-600 font-cyberpunk">Every day, our engine proactively finds the hidden opportunities and risks in your data. We then deliver these as simple, plain-English "Insight Cards" that explain what's happening, why it matters, and what you can do about it.</p>
+                                    <h2 class="text-[2rem] md:text-[2.25rem] font-semibold text-gray-900 mb-5 leading-[1.15] tracking-tight">Quick Insights</h2>
+                                    <p class="text-[0.95rem] md:text-[1rem] text-gray-600 leading-[1.65] font-normal">Every day, our engine proactively finds the hidden opportunities and risks in your data. We then deliver these as simple, plain-English "Insight Cards" that explain what's happening, why it matters, and what you can do about it.</p>
                         </div>
-                    <div>
-                        <div class="aspect-[21/10] bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl image-frame elevate">
-                            <img src="./assets/feature-briefing.png" alt="Quick Insights" class="w-full h-full object-cover" onerror="this.style.display='none'">
+                                <div class="relative">
+                                    <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform hover:scale-[1.01] transition-transform duration-500">
+                                        <div class="aspect-[20/9] relative flex items-center justify-center p-2">
+                                            <!-- Blurred background -->
+                                            <div class="absolute inset-0 bg-cover bg-center blur-2xl opacity-40" style="background-image: url('./assets/feature-briefing.png');"></div>
+                                            <!-- Sharp image on top -->
+                                            <img src="./assets/feature-briefing.png" alt="Quick Insights" class="relative z-10 w-full h-full object-contain" onerror="this.style.display='none'">
+                                        </div>
+                                    </div>
+                                    <div class="absolute -bottom-5 -left-5 w-28 h-28 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full blur-3xl opacity-50 animate-pulse"></div>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>
                 <!-- Feature 4 -->
-                 <div class="grid md:grid-cols-[35%_65%] gap-16 items-center px-4 py-16">
+                <div class="relative px-4 py-10 mb-12">
+                    <div class="max-w-[1600px] mx-auto">
+                        <div class="relative bg-gradient-to-br from-purple-50 via-fuchsia-50 to-pink-50 rounded-[2rem] p-12 md:p-20 overflow-hidden shadow-2xl border border-white/50" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-purple-400/20 to-fuchsia-400/20 rounded-full blur-3xl"></div>
+                            <div class="absolute bottom-0 left-0 w-[450px] h-[450px] bg-gradient-to-tr from-pink-400/20 to-rose-400/20 rounded-full blur-3xl"></div>
+                            
+                            <div class="relative z-10 grid md:grid-cols-[30%_70%] gap-16 items-center">
                     <div>
-                        <h2 class="text-4xl md:text-5xl font-bold text-gray-900">Weekly Action Plan</h2>
-                        <p class="mt-5 text-xl text-gray-600 font-cyberpunk">We automatically transform the most important "Try this" suggestions into a prioritized weekly to-do list. Each task is a step-by-step recipe for action, complete with a simulated impact, giving you the confidence to focus your energy where it matters most.</p>
+                                    <h2 class="text-[2rem] md:text-[2.25rem] font-semibold text-gray-900 mb-5 leading-[1.15] tracking-tight">Weekly Action Plan</h2>
+                                    <p class="text-[0.95rem] md:text-[1rem] text-gray-600 leading-[1.65] font-normal">We automatically transform the most important "Try this" suggestions into a prioritized weekly to-do list. Each task is a step-by-step recipe for action, complete with a simulated impact, giving you the confidence to focus your energy where it matters most.</p>
                             </div>
-                    <div>
-                         <div class="aspect-[21/10] bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl image-frame elevate">
-                            <img src="./assets/feature-plan.png" alt="Weekly Action Plan" class="w-full h-full object-cover" onerror="this.style.display='none'">
+                                <div class="relative">
+                                    <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform hover:scale-[1.01] transition-transform duration-500">
+                                        <div class="aspect-[20/9] relative flex items-center justify-center p-2">
+                                            <!-- Blurred background -->
+                                            <div class="absolute inset-0 bg-cover bg-center blur-2xl opacity-40" style="background-image: url('./assets/feature-plan.png');"></div>
+                                            <!-- Sharp image on top -->
+                                            <img src="./assets/feature-plan.png" alt="Weekly Action Plan" class="relative z-10 w-full h-full object-contain" onerror="this.style.display='none'">
                             </div>
                         </div>
+                                    <div class="absolute -bottom-5 -left-5 w-28 h-28 bg-gradient-to-br from-purple-400 to-fuchsia-500 rounded-full blur-3xl opacity-50 animate-pulse"></div>
                     </div>
-                <!-- Feature 5 -->
-                <div class="grid md:grid-cols-[35%_65%] gap-16 items-center px-4 py-16">
-                    <div>
-                        <h2 class="text-4xl md:text-5xl font-bold text-gray-900">Chat with Your Data</h2>
-                        <p class="mt-5 text-xl text-gray-600 font-cyberpunk">Your personal AI analyst is available 24/7. Ask complex questions about your business in plain English like "Which ad campaign was most profitable last week?" and get immediate, data-backed answers and suggestions, without ever waiting for a report to be built.</p>
                         </div>
-                    <div>
-                        <div class="aspect-[21/10] bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl image-frame elevate">
-                            <img src="./assets/feature-chat.png" alt="Chat with Your Data" class="w-full h-full object-cover" onerror="this.style.display='none'">
                         </div>
                     </div>
                 </div>
@@ -1007,79 +1083,77 @@
         </div>
     
         <!-- FAQ Section -->
-        <section id="faq" class="py-24 px-4 bg-white">
-            <div class="max-w-3xl mx-auto">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900">Frequently asked <span class="gradient-text">questions</span></h2>
-                    <p class="mt-4 text-lg text-gray-600">Everything you need to know about Lynlytics</p>
+        <section id="faq" class="py-24 px-4 bg-white" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-20">
+                    <h2 class="text-[2.75rem] md:text-[3.5rem] font-bold text-gray-900 mb-4 leading-[1.1] tracking-tight">FAQs</h2>
+                    <p class="text-[1.125rem] text-gray-600">Everything you need to know about Lynlytics</p>
                 </div>
 
-                <div class="space-y-1">
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>What makes Lynlytics different from traditional BI tools?</span>
-                            <svg class="faq-icon h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                <div class="space-y-0">
+                    <div class="faq-item-modern group">
+                        <button class="faq-question-modern w-full py-8 flex items-start justify-between text-left border-t border-gray-200 transition-colors hover:border-gray-300">
+                            <h3 class="text-[1.375rem] md:text-[1.5rem] font-semibold text-gray-900 pr-8 leading-[1.3]">What makes Lynlytics different from traditional BI tools?</h3>
+                            <svg class="faq-icon-modern w-7 h-7 text-gray-900 flex-shrink-0 transition-transform duration-300" viewBox="0 0 30 30" fill="currentColor">
+                                <path d="M16.139 13V0h-2.167v13h-13v2.167h13v13h2.167v-13h13V13h-13Z"/>
                             </svg>
-                        </div>
-                        <div class="faq-answer">
-                            Traditional BI tools are powerful reporting systems built for data analysts. They excel at visualizing what happened, but leave you to figure out why it happened and what to do next. Lynlytics is fundamentally different. We are an Actionable Intelligence Engine built for business owners. Our AI doesn't just give you charts; it analyzes your data, finds the critical insights, and delivers a simple, prioritized to-do list for the week. We close the gap between data and decision.
+                        </button>
+                        <div class="faq-answer-modern overflow-hidden transition-all duration-300">
+                            <p class="text-[1rem] md:text-[1.0625rem] text-gray-600 leading-[1.7] pb-8">Traditional BI tools are powerful reporting systems built for data analysts. They excel at visualizing what happened, but leave you to figure out why it happened and what to do next. Lynlytics is fundamentally different. We are an Actionable Intelligence Engine built for business owners. Our AI doesn't just give you charts; it analyzes your data, finds the critical insights, and delivers a simple, prioritized to-do list for the week. We close the gap between data and decision.</p>
                         </div>
                     </div>
 
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>How long does it take to set up?</span>
-                            <svg class="faq-icon h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    <div class="faq-item-modern group">
+                        <button class="faq-question-modern w-full py-8 flex items-start justify-between text-left border-t border-gray-200 transition-colors hover:border-gray-300">
+                            <h3 class="text-[1.375rem] md:text-[1.5rem] font-semibold text-gray-900 pr-8 leading-[1.3]">How long does it take to set up?</h3>
+                            <svg class="faq-icon-modern w-7 h-7 text-gray-900 flex-shrink-0 transition-transform duration-300" viewBox="0 0 30 30" fill="currentColor">
+                                <path d="M16.139 13V0h-2.167v13h-13v2.167h13v13h2.167v-13h13V13h-13Z"/>
                             </svg>
-                        </div>
-                        <div class="faq-answer">
-                            You can be set up and see your first insights in under 10 minutes. The process is simple: you securely connect your data sources (like Shopify or Meta Ads) through our embedded portal, and our AI gets to work. There are no complex configurations or data models to build. In fact, your "Initial Business Report" is often ready within minutes of connecting your data, providing immediate value.
+                        </button>
+                        <div class="faq-answer-modern overflow-hidden transition-all duration-300">
+                            <p class="text-[1rem] md:text-[1.0625rem] text-gray-600 leading-[1.7] pb-8">You can be set up and see your first insights in under 10 minutes. The process is simple: you securely connect your data sources (like Shopify or Meta Ads) through our embedded portal, and our AI gets to work. There are no complex configurations or data models to build. In fact, your "Initial Business Report" is often ready within minutes of connecting your data, providing immediate value.</p>
                         </div>
                     </div>
 
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>Is my data secure?</span>
-                            <svg class="faq-icon h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    <div class="faq-item-modern group">
+                        <button class="faq-question-modern w-full py-8 flex items-start justify-between text-left border-t border-gray-200 transition-colors hover:border-gray-300">
+                            <h3 class="text-[1.375rem] md:text-[1.5rem] font-semibold text-gray-900 pr-8 leading-[1.3]">Is my data secure?</h3>
+                            <svg class="faq-icon-modern w-7 h-7 text-gray-900 flex-shrink-0 transition-transform duration-300" viewBox="0 0 30 30" fill="currentColor">
+                                <path d="M16.139 13V0h-2.167v13h-13v2.167h13v13h2.167v-13h13V13h-13Z"/>
                             </svg>
-                        </div>
-                        <div class="faq-answer">
-                            Yes, absolutely. Your data security and privacy are built into the core of our architecture. Our system is designed with two fundamental principles:<br><br>
-                            Privacy by Design: Our AI agents reason using only anonymized metadata and business rules. Your raw, sensitive customer and financial data is never sent to a third-party LLM.<br><br>
-                            Verifiable Accuracy: All mathematical calculations are performed exclusively by our proprietary, VRAE-verified analytics core. We double-check the numbers so you can trust every insight.
+                        </button>
+                        <div class="faq-answer-modern overflow-hidden transition-all duration-300">
+                            <p class="text-[1rem] md:text-[1.0625rem] text-gray-600 leading-[1.7] pb-8">Yes, absolutely. Your data security and privacy are built into the core of our architecture. Our system is designed with two fundamental principles:<br><br><strong>Privacy by Design:</strong> Our AI agents reason using only anonymized metadata and business rules. Your raw, sensitive customer and financial data is never sent to a third-party LLM.<br><br><strong>Verifiable Accuracy:</strong> All mathematical calculations are performed exclusively by our proprietary, VRAE-verified analytics core. We double-check the numbers so you can trust every insight.</p>
                         </div>
                     </div>
 
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>What size business is Lynlytics built for?</span>
-                            <svg class="faq-icon h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    <div class="faq-item-modern group">
+                        <button class="faq-question-modern w-full py-8 flex items-start justify-between text-left border-t border-gray-200 transition-colors hover:border-gray-300">
+                            <h3 class="text-[1.375rem] md:text-[1.5rem] font-semibold text-gray-900 pr-8 leading-[1.3]">What size business is Lynlytics built for?</h3>
+                            <svg class="faq-icon-modern w-7 h-7 text-gray-900 flex-shrink-0 transition-transform duration-300" viewBox="0 0 30 30" fill="currentColor">
+                                <path d="M16.139 13V0h-2.167v13h-13v2.167h13v13h2.167v-13h13V13h-13Z"/>
                             </svg>
-                        </div>
-                        <div class="faq-answer">
-                            Lynlytics is designed from the ground up for Small and Medium-sized Businesses (SMBs). Our ideal customer is the busy founder or operator who doesn't have a dedicated team of data analysts. If you are an expert in your business but lack the time or tools to perform deep data analysis, Lynlytics is built for you. We automate the work of an analyst and deliver the simple, actionable plan you need to grow.
+                        </button>
+                        <div class="faq-answer-modern overflow-hidden transition-all duration-300">
+                            <p class="text-[1rem] md:text-[1.0625rem] text-gray-600 leading-[1.7] pb-8">Lynlytics is designed from the ground up for Small and Medium-sized Businesses (SMBs). Our ideal customer is the busy founder or operator who doesn't have a dedicated team of data analysts. If you are an expert in your business but lack the time or tools to perform deep data analysis, Lynlytics is built for you. We automate the work of an analyst and deliver the simple, actionable plan you need to grow.</p>
                         </div>
                     </div>
 
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>Do I need technical expertise to use Lynlytics?</span>
-                            <svg class="faq-icon h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    <div class="faq-item-modern group">
+                        <button class="faq-question-modern w-full py-8 flex items-start justify-between text-left border-t border-b border-gray-200 transition-colors hover:border-gray-300">
+                            <h3 class="text-[1.375rem] md:text-[1.5rem] font-semibold text-gray-900 pr-8 leading-[1.3]">Do I need technical expertise to use Lynlytics?</h3>
+                            <svg class="faq-icon-modern w-7 h-7 text-gray-900 flex-shrink-0 transition-transform duration-300" viewBox="0 0 30 30" fill="currentColor">
+                                <path d="M16.139 13V0h-2.167v13h-13v2.167h13v13h2.167v-13h13V13h-13Z"/>
                             </svg>
-                        </div>
-                        <div class="faq-answer">
-                            No, absolutely not. That is the core problem we solve. You don't need any technical expertise, knowledge of SQL, BI tool or experience with data analysis to use Lynlytics. Our platform is designed to handle all the complexity for you. All insights and to-do lists are delivered in plain English, so you can focus on running your business, not on becoming a Business Analyst.
+                        </button>
+                        <div class="faq-answer-modern overflow-hidden transition-all duration-300">
+                            <p class="text-[1rem] md:text-[1.0625rem] text-gray-600 leading-[1.7] pb-8">No, absolutely not. That is the core problem we solve. You don't need any technical expertise, knowledge of SQL, BI tool or experience with data analysis to use Lynlytics. Our platform is designed to handle all the complexity for you. All insights and to-do lists are delivered in plain English, so you can focus on running your business, not on becoming a Business Analyst.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-12 text-center">
-                    <p class="text-gray-600">Still have questions? <a href="mailto:hello@lynlytics.com" class="font-semibold hover:underline text-blue-600">Get in touch</a></p>
+                <div class="mt-16 text-center">
+                    <p class="text-[1.0625rem] text-gray-600">Still have questions? <a href="mailto:hello@lynlytics.com" class="font-semibold hover:underline text-gray-900 transition-colors">Get in touch</a></p>
                 </div>
             </div>
         </section>
@@ -1173,9 +1247,9 @@
             });
 
             // FAQ accordion
-            const faqItems = document.querySelectorAll('.faq-item');
+            const faqItems = document.querySelectorAll('.faq-item-modern');
             faqItems.forEach(item => {
-                const question = item.querySelector('.faq-question');
+                const question = item.querySelector('.faq-question-modern');
                 question.addEventListener('click', () => {
                     const isActive = item.classList.contains('active');
                     
