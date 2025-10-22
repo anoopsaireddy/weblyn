@@ -2,6 +2,67 @@
 
 import { useState, useEffect } from 'react'
 
+// Typewriter Effect Component for Weekly Business Report
+const TypewriterReport = () => {
+  const [displayedText, setDisplayedText] = useState("")
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [showCursor, setShowCursor] = useState(true)
+  
+  const fullText = `Executive Summary: SpenceCart
+
+Welcome, Sara. We've completed the initial analysis of your connected data sources. Overall, SpenceCart is demonstrating strong top-line growth, with revenue increasing by a healthy 28.5% year-over-year. However, this growth has come at the cost of declining profitability, with your overall profit margin dropping by 3.1%. Our initial findings suggest the key areas to focus on are optimizing ad spend efficiency and addressing product return rates to improve your bottom line.
+
+At a Glance: Your 12-Month Performance
+Total Revenue: $1.24M
+A strong indicator of healthy market demand and brand growth.
+
+Profit Margin: 18.2%
+Declining slightly; a key area for optimization to ensure sustainable growth.
+
+Avg. Order Value (AOV): $128.50
+Increasing year-over-year, showing strong customer trust.
+
+Key Strengths
+Strong Revenue Growth: Your total revenue of $1.24M is impressive, driven by a 15% increase in total orders and a healthy rise in AOV.
+Breakout Product Success: The "Classic Leather Tote" is a clear winner, driving 35% of total sales and likely acting as a major source of new customer acquisition.
+
+Immediate Opportunities
+Improve Ad Spend Efficiency: Our analysis indicates some ad campaigns, particularly for the high-volume "Elegant Silk Scarf", may have a low profit margin. Optimizing these could significantly boost your bottom line.
+Reduce High Return Rate: The "New Silk Blouse" has an unusually high return rate (30%). Addressing potential sizing issues could reclaim lost revenue.`
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (currentIndex < fullText.length) {
+        setDisplayedText(fullText.slice(0, currentIndex + 1))
+        setCurrentIndex(currentIndex + 1)
+      } else {
+        clearInterval(timer)
+      }
+    }, 30) // Typing speed: 30ms per character
+
+    return () => clearInterval(timer)
+  }, [currentIndex, fullText])
+
+  useEffect(() => {
+    const cursorTimer = setInterval(() => {
+      setShowCursor(prev => !prev)
+    }, 500) // Blinking cursor
+
+    return () => clearInterval(cursorTimer)
+  }, [])
+
+  return (
+    <div className="h-full overflow-y-auto">
+      <div className="text-xs text-gray-800 leading-relaxed whitespace-pre-wrap font-mono">
+        {displayedText}
+        <span className={`inline-block w-1 h-4 bg-gray-800 ml-1 ${showCursor ? 'opacity-100' : 'opacity-0'}`}>
+          |
+        </span>
+      </div>
+    </div>
+  )
+}
+
 // Chat Component (adapted from lynlyticsdemo)
 const ChatComponent = () => {
   const [messages] = useState([
@@ -1134,52 +1195,9 @@ const ProductShowcase = () => {
                           <h2 className="text-xs font-semibold bg-gradient-to-r from-green-600 to-green-800 bg-clip-text text-transparent">Weekly Business Report</h2>
                         </div>
 
-                        {/* Report Content */}
+                        {/* Report Content with Typewriter Effect */}
                         <div className="flex-1 p-3 bg-white" style={{ height: 'calc(100% - 40px)' }}>
-                          <div className="space-y-2">
-                            {/* Revenue */}
-                            <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                              <span className="text-xs text-gray-600">Revenue</span>
-                              <div className="text-right">
-                                <span className="text-sm font-bold text-gray-800">$28,540</span>
-                                <span className="text-xs text-green-600 ml-2">+8.2%</span>
-                              </div>
-                            </div>
-
-                            {/* Orders */}
-                            <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                              <span className="text-xs text-gray-600">Orders</span>
-                              <div className="text-right">
-                                <span className="text-sm font-bold text-gray-800">762</span>
-                                <span className="text-xs text-green-600 ml-2">+12.5%</span>
-                              </div>
-                            </div>
-
-                            {/* Profit Margin */}
-                            <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                              <span className="text-xs text-gray-600">Profit Margin</span>
-                              <div className="text-right">
-                                <span className="text-sm font-bold text-gray-800">17.5%</span>
-                                <span className="text-xs text-green-600 ml-2">+2.1%</span>
-                              </div>
-                            </div>
-
-                            {/* AOV */}
-                            <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                              <span className="text-xs text-gray-600">AOV</span>
-                              <div className="text-right">
-                                <span className="text-sm font-bold text-gray-800">$129.20</span>
-                                <span className="text-xs text-green-600 ml-2">+3.2%</span>
-                              </div>
-                            </div>
-
-                            {/* Summary */}
-                            <div className="mt-3 p-2 bg-blue-50 rounded">
-                              <p className="text-xs text-gray-700 text-center">
-                                <strong>This Week:</strong> Strong performance across all metrics with consistent growth trends.
-                              </p>
-                            </div>
-                          </div>
+                          <TypewriterReport />
                         </div>
                       </div>
                     </div>
