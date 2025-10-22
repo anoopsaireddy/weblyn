@@ -68,9 +68,6 @@ export default function TeamPage() {
                       width={120}
                       height={120}
                       className="w-[120px] h-[120px] rounded-full object-cover border-4 border-white/80 shadow-lg mx-auto"
-                      onError={(e) => {
-                        e.currentTarget.style.display = "none"
-                      }}
                     />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">{member.name}</h3>
