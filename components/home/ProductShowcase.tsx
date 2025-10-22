@@ -933,7 +933,7 @@ const ProductShowcase = () => {
                 <div className="relative z-10">
                   {/* Full UI Window Box - Wider and Centered */}
                   <div className="relative flex justify-center mb-8">
-                    <div className="bg-white border border-gray-200 rounded-xl shadow-xl overflow-hidden" style={{ height: '80vh', minHeight: '600px', width: '95vw', maxWidth: '1400px' }}>
+                    <div className="bg-white border border-gray-200 rounded-xl shadow-xl overflow-hidden" style={{ height: '90vh', minHeight: '700px', width: '95vw', maxWidth: '1400px' }}>
                       {/* Full Quick Insights UI */}
                       <div className="h-full overflow-hidden">
                         <FullDashboardComponent />
