@@ -613,44 +613,44 @@ const FullDashboardComponent = () => {
                     </button>
                   </div>
 
-                  {/* Apple-style Content Sections - Improved Readability */}
-                  <div className="space-y-2">
-                    <div className="bg-slate-50/80 rounded-md p-2.5 border border-slate-100/60">
-                      <div className="flex items-center mb-1.5">
-                        <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-1.5"></div>
-                        <span className="text-sm font-semibold text-slate-700 uppercase tracking-wide">What we saw</span>
+                  {/* Apple-style Content Sections - Compact */}
+                  <div className="space-y-1.5">
+                    <div className="bg-slate-50/80 rounded-md p-1.5 border border-slate-100/60">
+                      <div className="flex items-center mb-1">
+                        <div className="w-1 h-1 bg-blue-500 rounded-full mr-1"></div>
+                        <span className="text-xs font-semibold text-slate-700 uppercase tracking-wide">What we saw</span>
                       </div>
-                      <p className="text-slate-700 text-sm leading-relaxed">{insight.content.what}</p>
+                      <p className="text-slate-700 text-xs leading-tight">{insight.content.what}</p>
                     </div>
 
                     {/* Why you should care - Moved to second position */}
-                    <div className="bg-red-50/80 rounded-md p-2.5 border border-red-100/60">
-                      <div className="flex items-center mb-1.5">
-                        <div className="w-1.5 h-1.5 bg-red-500 rounded-full mr-1.5"></div>
-                        <span className="text-sm font-semibold text-slate-700 uppercase tracking-wide">Why you should care</span>
+                    <div className="bg-red-50/80 rounded-md p-1.5 border border-red-100/60">
+                      <div className="flex items-center mb-1">
+                        <div className="w-1 h-1 bg-red-500 rounded-full mr-1"></div>
+                        <span className="text-xs font-semibold text-slate-700 uppercase tracking-wide">Why you should care</span>
                       </div>
-                      <p className="text-slate-700 text-sm leading-relaxed">
+                      <p className="text-slate-700 text-xs leading-tight">
                         {insight.content.care || "This insight directly impacts your business performance and requires immediate attention to maintain growth and efficiency."}
                       </p>
                     </div>
 
                     {insight.content.why && (
-                      <div className="bg-amber-50/80 rounded-md p-2.5 border border-amber-100/60">
-                        <div className="flex items-center mb-1.5">
-                          <div className="w-1.5 h-1.5 bg-amber-500 rounded-full mr-1.5"></div>
-                          <span className="text-sm font-semibold text-slate-700 uppercase tracking-wide">Why this might be happening</span>
+                      <div className="bg-amber-50/80 rounded-md p-1.5 border border-amber-100/60">
+                        <div className="flex items-center mb-1">
+                          <div className="w-1 h-1 bg-amber-500 rounded-full mr-1"></div>
+                          <span className="text-xs font-semibold text-slate-700 uppercase tracking-wide">Why this might be happening</span>
                         </div>
-                        <p className="text-slate-700 text-sm leading-relaxed">{insight.content.why}</p>
+                        <p className="text-slate-700 text-xs leading-tight">{insight.content.why}</p>
                       </div>
                     )}
 
                     {insight.content.try && (
-                      <div className="bg-green-50/80 rounded-md p-2.5 border border-green-100/60">
-                        <div className="flex items-center mb-1.5">
-                          <div className="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></div>
-                          <span className="text-sm font-semibold text-slate-700 uppercase tracking-wide">Try this</span>
+                      <div className="bg-green-50/80 rounded-md p-1.5 border border-green-100/60">
+                        <div className="flex items-center mb-1">
+                          <div className="w-1 h-1 bg-green-500 rounded-full mr-1"></div>
+                          <span className="text-xs font-semibold text-slate-700 uppercase tracking-wide">Try this</span>
                         </div>
-                        <p className="text-slate-700 text-sm leading-relaxed">{insight.content.try}</p>
+                        <p className="text-slate-700 text-xs leading-tight">{insight.content.try}</p>
                       </div>
                     )}
                   </div>
@@ -933,7 +933,7 @@ const ProductShowcase = () => {
                 <div className="relative z-10">
                   {/* Full UI Window Box - Wider and Centered */}
                   <div className="relative flex justify-center mb-8">
-                    <div className="bg-white border border-gray-200 rounded-xl shadow-xl overflow-hidden" style={{ height: '70vh', minHeight: '500px', width: '95vw', maxWidth: '1400px' }}>
+                    <div className="bg-white border border-gray-200 rounded-xl shadow-xl overflow-hidden" style={{ height: '80vh', minHeight: '600px', width: '95vw', maxWidth: '1400px' }}>
                       {/* Full Quick Insights UI */}
                       <div className="h-full overflow-hidden">
                         <FullDashboardComponent />
