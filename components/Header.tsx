@@ -54,20 +54,8 @@ export default function Header() {
           >
             Integrations
           </Link>
-          <Link
-            href="/#features"
-            className="block py-3 px-4 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Features
-          </Link>
-          <Link
-            href="/#faq"
-            className="block py-3 px-4 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            FAQ
-          </Link>
+          {/* Removed Features anchor */}
+          <Link href="/#faq" className="block py-3 px-4 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors" onClick={() => setMobileMenuOpen(false)}>FAQ</Link>
           <a
             href="mailto:anoopsai@lynlytics.com"
             className="block py-3 px-4 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
@@ -75,15 +63,7 @@ export default function Header() {
             Contact us
           </a>
         </div>
-        <div className="px-6 pb-8">
-          <Link
-            href="/coming-soon"
-            className="block text-center py-3 bg-[#1877F2] text-white rounded-lg font-semibold hover:bg-[#0d66d0] transition-colors"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Get started
-          </Link>
-        </div>
+        {/* Removed Get started link to coming-soon */}
       </div>
 
       <button

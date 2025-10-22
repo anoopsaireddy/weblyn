@@ -11,7 +11,7 @@ import LynActiveSection from "@/components/home/LynActiveSection"
 import FAQSection from "@/components/home/FAQSection"
 import ProductShowcase from "@/components/home/ProductShowcase"
 // Removed RealtimeHelpSection
-import CTASection from "@/components/home/CTASection"
+// Removed CTASection
 
 export default function HomePage() {
   return (
@@ -33,7 +33,6 @@ export default function HomePage() {
         <div className="border-b border-gray-200 my-8"></div>
         <FAQSection />
         <div className="border-b border-gray-200"></div>
-        <CTASection />
       </main>
       <Footer />
     </>
