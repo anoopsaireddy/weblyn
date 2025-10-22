@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lynlytics | Your Actionable Intelligence Engine</title>
+    <meta name="description" content="Lynlytics is the actionable intelligence engine for SMBs. We turn your complex business data into a simple, prioritized action plan to drive growth.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            /* Enhanced background with subtle gradient */
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+            color: #0a0a0a;
+            letter-spacing: -0.01em;
+            overflow-x: hidden;
+        }
+        
+        /* Scroll Progress Bar */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #6aa7ff, #da67cf, #00D9FF);
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+        
+        :root {
+            /* Wix-inspired fluid scaling and palette */
+            --scaling-factor: 1;
+            --theme-spx-ratio: calc(var(--scaling-factor) / 1920);
+            --full-viewport: 1vw;
+
+            --primary-blue: #007aff;
+            --primary-blue-hover: #0062cc;
+            --soft-border: rgba(10,10,10,0.08);
+
+            --accent-apple: #CEDDE4; /* soft blue-gray */
+            --accent-lime: #EBFFB1;  /* wix accent */
+            --accent-orange: #FF983B; /* warm accent */
+            --ink-strong: #001E36;    /* deep navy like --color_13 */
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #6697c9, #da67cf);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-blue {
+            background: linear-gradient(90deg, #6aa5ff, #9a8cff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-violet {
+            background: linear-gradient(90deg, #b26bff, #e673ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        #smb-animation {
+            display: inline-block;
+            transition: opacity 0.3s ease-in-out;
+            min-width: 240px;
+            text-align: center;
+            font-size: 1.25em;
+            font-weight: 600;
+        }
+        .fade-out {
+            opacity: 0;
+        }
+        .font-cyberpunk {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        .fade-in {
+            opacity: 1;
+        }
+        .glass {
+            background: rgba(255,255,255,0.72);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid var(--soft-border);
+        }
+        /* Enhanced header with better glassmorphism and gradient border */
+        .glass-header {
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: saturate(200%) blur(30px);
+            -webkit-backdrop-filter: saturate(200%) blur(30px);
+            border-bottom: 1px solid rgba(106, 167, 255, 0.15);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+            position: relative;
+        }
+        .glass-header::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(106, 167, 255, 0.3), rgba(218, 103, 207, 0.3), transparent);
+        }
+        .blur-heavy { /* wixui-blur-layer-like */
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(150px) saturate(140%);
+            -webkit-backdrop-filter: blur(150px) saturate(140%);
+        }
+        .elevate {
+            transition: transform 300ms ease, box-shadow 300ms ease;
+        }
+        .elevate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+        }
+        .ring-hover {
+            transition: all 250ms ease;
+        }
+        .ring-hover:hover {
+            transform: scale(1.02);
+        }
+        .loop-hover-icon { /* micro animation for button icon */
+            display: inline-block;
+        }
+        .ring-hover:hover .loop-hover-icon {
+            animation: loop-hover 0.6s linear infinite alternate;
+        }
+        @keyframes loop-hover {
+            from { transform: translateY(0); }
+            to { transform: translateY(-3px); }
+        }
+        /* Enhanced hero background with more sophisticated gradients */
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+              radial-gradient(circle at 20% 20%, rgba(106,167,255,0.15), transparent 50%),
+              radial-gradient(circle at 80% 10%, rgba(218,103,207,0.18), transparent 50%),
+              radial-gradient(circle at 50% 90%, rgba(0,217,255,0.12), transparent 50%),
+              radial-gradient(circle at 10% 80%, rgba(205,255,0,0.08), transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Animated Gradient Mesh */
+        .gradient-mesh {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .mesh-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float-mesh 20s ease-in-out infinite;
+        }
+        .blob-1 {
+            width: 600px;
+            height: 600px;
+            top: -10%;
+            left: -5%;
+            background: linear-gradient(135deg, #00D9FF, #6aa7ff);
+            animation-delay: 0s;
+        }
+        .blob-2 {
+            width: 500px;
+            height: 500px;
+            top: 30%;
+            right: -5%;
+            background: linear-gradient(135deg, #da67cf, #b26bff);
+            animation-delay: 5s;
+        }
+        .blob-3 {
+            width: 450px;
+            height: 450px;
+            bottom: -10%;
+            left: 20%;
+            background: linear-gradient(135deg, #CDFF00, #00D9FF);
+            animation-delay: 10s;
+        }
+        @keyframes float-mesh {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, -50px) rotate(90deg); }
+            50% { transform: translate(-30px, 30px) rotate(180deg); }
+            75% { transform: translate(30px, 50px) rotate(270deg); }
+        }
+        
+        /* Wave Dividers */
+        .wave-divider {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+        .wave-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 80px;
+        }
+        .wave-divider.flip {
+            transform: rotate(180deg);
+        }
+        .image-frame {
+            border: 1px solid var(--soft-border);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .floating-graphic {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.5;
+            animation: float 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+        .graphic-1 {
+            top: 12%;
+            left: 8%;
+            width: clamp(180px, 18vw, 340px);
+            height: clamp(180px, 18vw, 340px);
+            background: linear-gradient(135deg, rgba(206,221,228,0.50), rgba(106,165,255,0.25)); /* --accent-apple blend */
+            animation-delay: 0s;
+        }
+        .graphic-2 {
+            top: 58%;
+            right: 12%;
+            width: clamp(160px, 16vw, 300px);
+            height: clamp(160px, 16vw, 300px);
+            background: linear-gradient(135deg, rgba(235,255,177,0.45), rgba(255,152,59,0.25)); /* lime + orange */
+            animation-delay: 2s;
+        }
+        .graphic-3 {
+            bottom: 18%;
+            left: 18%;
+            width: clamp(140px, 14vw, 260px);
+            height: clamp(140px, 14vw, 260px);
+            background: linear-gradient(135deg, rgba(106,165,255,0.25), rgba(0,200,200,0.18));
+            animation-delay: 4s;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 24px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.12);
+        }
+        .feature-card:hover {
+            background: rgba(255,255,255,0.8);
+            transform: translateY(-8px) rotateX(2deg);
+            box-shadow: 0px 40px 80px rgba(0, 0, 0, 0.2);
+            border-color: rgba(0, 217, 255, 0.3);
+        }
+        .faq-item-modern {
+            border-bottom: none;
+        }
+        .faq-question-modern {
+            cursor: pointer;
+            background: transparent;
+            border: none;
+        }
+        .faq-question-modern:focus {
+            outline: 2px solid rgba(0, 0, 0, 0.1);
+            outline-offset: 2px;
+        }
+        .faq-answer-modern {
+            max-height: 0;
+            overflow: hidden;
+        }
+        .faq-item-modern.active .faq-answer-modern {
+            max-height: 800px;
+        }
+        .faq-item-modern.active .faq-icon-modern {
+            transform: rotate(45deg);
+        }
+        
+        /* Flow Diagram Animations */
+        .flow-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            border-radius: 24px;
+            padding: 2.5rem 2.5rem;
+            min-width: 280px;
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 
+                0 10px 40px rgba(0,0,0,0.12),
+                0 1px 3px rgba(0,0,0,0.05),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.7);
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        .flow-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #6aa7ff, #da67cf);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .flow-card:hover::before {
+            opacity: 1;
+        }
+        .flow-card:hover {
+            transform: translateY(-8px) rotateX(2deg);
+            box-shadow: 
+                0 20px 80px rgba(0,0,0,0.18),
+                0 5px 15px rgba(0,0,0,0.08),
+                inset 0 1px 0 rgba(255,255,255,1);
+            border-color: rgba(0, 217, 255, 0.4);
+        }
+        .flow-arrow {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.6;
+        }
+        .flow-arrow svg {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        .gradient-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #6aa7ff, #da67cf);
+            box-shadow: 0 8px 25px rgba(106, 167, 255, 0.3);
+            animation: float-icon 3s ease-in-out infinite;
+        }
+        @keyframes float-icon {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .flow-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #6b7280;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Pain Point Cards */
+        .pain-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            border-radius: 20px;
+            padding: 2rem 1.75rem;
+            box-shadow: 
+                0 10px 40px rgba(0,0,0,0.12),
+                0 1px 3px rgba(0,0,0,0.05),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.7);
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        .pain-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ef4444, #f97316, #8b5cf6);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .pain-card:hover::before {
+            opacity: 1;
+        }
+        .pain-card:hover {
+            transform: translateY(-12px) scale(1.02) rotateX(2deg);
+            box-shadow: 
+                0 20px 80px rgba(0,0,0,0.18),
+                0 5px 15px rgba(0,0,0,0.08),
+                inset 0 1px 0 rgba(255,255,255,1);
+            border-color: rgba(205, 255, 0, 0.3);
+        }
+        .pain-icon-wrapper {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1.25rem;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            animation: float-icon 3s ease-in-out infinite;
+        }
+        
+        /* Integration Cards */
+        .integration-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+        .integration-card:hover {
+            transform: translateY(-8px) rotateY(5deg);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.16);
+            border-color: rgba(0, 217, 255, 0.4);
+            background: rgba(255, 255, 255, 0.85);
+        }
+        .integration-logo {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            padding: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .integration-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            line-height: 1.3;
+        }
+        
+        /* Magnetic Button Effect */
+        .magnetic-btn {
+            position: relative;
+            transition: transform 0.2s ease;
+            will-change: transform;
+        }
+        
+        /* Electric Accents */
+        .accent-cyan {
+            color: #00D9FF;
+        }
+        .accent-lime {
+            color: #CDFF00;
+        }
+        .glow-cyan {
+            box-shadow: 0 0 40px rgba(0, 217, 255, 0.4);
+        }
+        .glow-lime {
+            box-shadow: 0 0 40px rgba(205, 255, 0, 0.4);
+        }
+        
+        /* Staggered Text Animation */
+        .text-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: reveal 0.6s ease forwards;
+        }
+        .text-reveal:nth-child(1) { animation-delay: 0.1s; }
+        .text-reveal:nth-child(2) { animation-delay: 0.2s; }
+        .text-reveal:nth-child(3) { animation-delay: 0.3s; }
+        @keyframes reveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Enhanced Image Frames with Parallax */
+        .image-frame {
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.12),
+                0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        .image-frame:hover {
+            box-shadow: 
+                0 30px 80px rgba(0,0,0,0.2),
+                0 0 60px rgba(0, 217, 255, 0.2),
+                0 0 0 1px rgba(0, 217, 255, 0.3) inset;
+            transform: translateY(-4px);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-button {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+        .mobile-menu-button svg {
+            width: 24px;
+            height: 24px;
+            color: #1d1d1f;
+        }
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            box-shadow: -10px 0 50px rgba(0,0,0,0.1);
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 9999;
+            overflow-y: auto;
+        }
+        .mobile-menu.active {
+            right: 0;
+        }
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 9998;
+        }
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        .mobile-menu-links {
+            padding: 2rem 1.5rem;
+        }
+        .mobile-menu-links a {
+            display: block;
+            padding: 1rem 0;
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: #1d1d1f;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: color 0.2s;
+        }
+        .mobile-menu-links a:hover {
+            color: #007aff;
+        }
+        .mobile-menu-cta {
+            padding: 0 1.5rem 2rem;
+        }
+        .mobile-menu-cta a {
+            display: block;
+            text-align: center;
+            padding: 1rem;
+            background: #000;
+            color: #fff;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        @media (max-width: 768px) {
+            .mobile-menu-button {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
+    
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-header">
+            <span class="text-xl font-bold" style="color: #1877F2;">Lynlytics</span>
+            <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="mobile-menu-links">
+            <a href="#" class="mobile-menu-link">Product</a>
+            <a href="#integrations" class="mobile-menu-link">Integrations</a>
+            <a href="#features" class="mobile-menu-link">Features</a>
+            <a href="#faq" class="mobile-menu-link">FAQ</a>
+            <a href="mailto:hello@lynlytics.com" class="mobile-menu-link">Contact us</a>
+        </div>
+        <div class="mobile-menu-cta">
+            <a href="coming-soon.html">Get started</a>
+        </div>
+    </div>
+
+    <header class="fixed top-0 left-0 right-0 z-50">
+        <div class="glass-header">
+            <div class="flex items-center justify-between h-[72px] px-6 md:px-8 max-w-7xl mx-auto">
+                <!-- Left: Logo -->
+                <a href="#" class="text-[22px] tracking-tight font-bold transition-colors hover:text-blue-600" style="color: #1877F2;">Lynlytics</a>
+                
+                <!-- Center: Navigation -->
+                <nav class="hidden md:flex md:items-center md:space-x-10">
+                    <a href="#" class="text-[15px] font-medium text-gray-700 hover:text-gray-900 transition-colors">Product</a>
+                    <a href="#integrations" class="text-[15px] font-medium text-gray-700 hover:text-gray-900 transition-colors">Integrations</a>
+                    <a href="#features" class="text-[15px] font-medium text-gray-700 hover:text-gray-900 transition-colors">Features</a>
+                    <a href="#faq" class="text-[15px] font-medium text-gray-700 hover:text-gray-900 transition-colors">FAQ</a>
+                    <a href="team.html" class="text-[15px] font-medium text-gray-700 hover:text-gray-900 transition-colors">Team</a>
+                </nav>
+                
+                <!-- Right: Contact Us Button -->
+                <div class="flex items-center gap-4">
+                    <a href="mailto:hello@lynlytics.com" class="hidden md:inline-flex items-center text-[15px] font-medium text-gray-700 hover:text-gray-900 transition-colors">Contact Us</a>
+                    <!-- Mobile Menu Button -->
+                    <button class="mobile-menu-button" id="mobile-menu-btn" aria-label="Open menu">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Enhanced hero section background -->
+        <section class="relative min-h-[90vh] flex items-center justify-center pt-24 px-4 overflow-hidden" style="background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);">
+            <div class="hero-bg"></div>
+            
+            <div class="max-w-5xl mx-auto text-center relative z-10">
+                <h1 class="text-[2.75rem] md:text-[3.5rem] font-semibold text-gray-900 leading-[1.15] mb-6">
+                    Meet <span class="gradient-text">Lyn,</span> your personal<br><span class="gradient-text">AI-Powered Business Analyst.</span>
+                </h1>
+                <p class="mt-6 text-[1.0625rem] md:text-[1.125rem] text-gray-600 max-w-3xl mx-auto leading-[1.7] font-normal">
+                    Lyn is the AI analyst at the heart of Lynlytics, built to learn the unique context of your company. Lyn finds the deep, micro-analytic insights that dashboards simply cannot provide and advises you on the exact steps to take next to improve your business.
+                </p>
+                <div class="mt-10">
+                    <form action="https://formspree.io/f/mnngbzbv" method="POST" class="flex flex-col sm:flex-row gap-4 items-center justify-center max-w-md mx-auto">
+                        <input type="email" name="email" placeholder="Enter Your Email" required class="flex-1 px-6 py-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-500">
+                        <button type="submit" class="magnetic-btn px-8 py-4 rounded-full bg-black text-white font-medium text-base ring-hover inline-block whitespace-nowrap">Join Waitlist</button>
+                    </form>
+                </div>
+                <div class="mt-12 text-[1.125rem] md:text-[1.25rem] text-gray-600 font-normal">
+                    <span>The intelligence engine for modern SMB's like </span>
+                    <span id="smb-animation" class="gradient-violet font-medium">Creative Agencies</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wave Divider -->
+        <div class="wave-divider">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#f8fafc"></path>
+            </svg>
+        </div>
+
+        <!-- Section 2: Dashboards Don't Run a Business -->
+        <section class="px-4 py-24 bg-slate-50">
+            <div class="max-w-6xl mx-auto">
+                <!-- Heading -->
+                <div class="text-center max-w-4xl mx-auto mb-16">
+                    <h2 class="text-[2.5rem] md:text-[3rem] font-semibold text-gray-900 leading-[1.15] mb-6">Dashboards Don't Run a<br><span class="gradient-text">Business. Actions Do.</span></h2>
+                    <p class="text-[1.0625rem] md:text-[1.125rem] text-gray-600 leading-[1.7] font-normal">You're overloaded with charts that show you what happened, but leave you guessing why. Lynlytics is designed to break this cycle. Your AI analyst, Lyn, doesn't just report on the past; it delivers the clarity and direction you need to move your business forward in three key ways:</p>
+                </div>
+
+                <!-- Cards Grid -->
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <div class="pain-card">
+                        <div class="pain-icon-wrapper" style="background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-3">Finds the Hidden Insights</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed font-normal">Lyn proactively monitors your business 24/7 and goes beyond dashboards to find the deep, cross-source micro analytic insights and explains the why behind your numbers.</p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="pain-card">
+                        <div class="pain-icon-wrapper" style="background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-3">Builds Your Weekly Action Plan</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed font-normal">Lyn transforms the most critical insights into your weekly action plan. Each advice is a clear recipe with step-by-step guidance, turning complex analysis into confident execution.</p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="pain-card">
+                        <div class="pain-icon-wrapper" style="background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-3">Lyn is always active</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed font-normal">Lyn is your personal analyst, available 24/7 interacting with you. Ask complex business questions in plain English and get immediate, data-backed answers and strategic advice, all in a simple chat.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wave Divider -->
+        <div class="wave-divider">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="#f8fafc"></path>
+            </svg>
+        </div>
+
+        <!-- Section 3: From Raw Data to Your Action Plan -->
+        <section class="px-4 py-24 bg-white">
+            <div class="max-w-6xl mx-auto">
+                <!-- Heading -->
+                <div class="text-center max-w-4xl mx-auto mb-20">
+                    <h2 class="text-[2.5rem] md:text-[3rem] font-semibold text-gray-900 leading-[1.15] mb-6">From Raw Data to <span class="gradient-text">Your Action Plan</span></h2>
+                    <p class="text-[1.0625rem] md:text-[1.125rem] text-gray-600 leading-[1.7] font-normal">Our process is designed to be simple for you on the outside and powerful on the inside. We turn your scattered data into a clear plan in three automated steps.</p>
+                </div>
+
+                <!-- Flow Diagram -->
+                <div class="grid md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-10 items-center max-w-6xl mx-auto">
+                    <!-- Step 1 -->
+                    <div class="flow-card">
+                        <div class="gradient-icon" style="background: linear-gradient(135deg, #ef4444, #f97316);">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Connect your Data</h3>
+                        <p class="text-sm text-gray-600 font-normal">Multiple sources, scattered insights, complex patterns</p>
+                    </div>
+
+                    <!-- Arrow 1 -->
+                    <div class="flow-arrow hidden md:block">
+                        <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                        </svg>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flow-card">
+                        <div class="gradient-icon" style="background: linear-gradient(135deg, #6aa7ff, #da67cf);">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Lyn Finds the Insights</h3>
+                        <p class="text-sm text-gray-600 font-normal">24/7 analysis, pattern recognition, insight generation</p>
+                    </div>
+
+                    <!-- Arrow 2 -->
+                    <div class="flow-arrow hidden md:block">
+                        <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                        </svg>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flow-card">
+                        <div class="gradient-icon" style="background: linear-gradient(135deg, #10b981, #06b6d4);">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">You Get a Clear Plan</h3>
+                        <p class="text-sm text-gray-600 font-normal">Clear priorities, step-by-step guidance, measurable impact</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wave Divider -->
+        <div class="wave-divider">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#ffffff"></path>
+            </svg>
+        </div>
+
+        <!-- Integrations Section -->
+        <section id="integrations" class="py-24 px-4 bg-slate-50">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900">
+                        A Unified View of Your <span class="gradient-text">Entire Business</span>
+                    </h2>
+                    <p class="mt-5 text-xl text-gray-600 font-cyberpunk">Seamlessly integrate your sales, marketing, and finance data in minutes. Lynlytics connects to the tools you already rely on to create a single source of truth.</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Shopify -->
+                    <div class="integration-card">
+                        <div class="integration-logo" style="background: linear-gradient(135deg, #95BF47, #7AB55C);">
+                            <img src="https://cdn.simpleicons.org/shopify/white" alt="Shopify" class="w-10 h-10" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:white;font-size:24px;font-weight:bold\'>S</span>';">
+                        </div>
+                        <span class="integration-name">Shopify</span>
+                    </div>
+
+                    <!-- QuickBooks -->
+                    <div class="integration-card">
+                        <div class="integration-logo" style="background: linear-gradient(135deg, #2CA01C, #228B16);">
+                            <img src="https://cdn.simpleicons.org/quickbooks/white" alt="QuickBooks" class="w-10 h-10" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:white;font-size:24px;font-weight:bold\'>QB</span>';">
+                        </div>
+                        <span class="integration-name">QuickBooks</span>
+                    </div>
+
+                    <!-- Facebook Ads -->
+                    <div class="integration-card">
+                        <div class="integration-logo" style="background: linear-gradient(135deg, #0081FB, #0064C8);">
+                            <img src="https://cdn.simpleicons.org/facebook/white" alt="Facebook" class="w-10 h-10" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:white;font-size:24px;font-weight:bold\'>F</span>';">
+                        </div>
+                        <span class="integration-name">Facebook Ads</span>
+                    </div>
+
+                    <!-- Google Ads -->
+                    <div class="integration-card">
+                        <div class="integration-logo" style="background: linear-gradient(135deg, #4285F4, #3367D6);">
+                            <img src="assets/google-ads.png" alt="Google Ads" class="w-10 h-10" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:white;font-size:20px;font-weight:bold\'>Ads</span>';">
+                        </div>
+                        <span class="integration-name">Google Ads</span>
+                    </div>
+
+                    <!-- Square -->
+                    <div class="integration-card">
+                        <div class="integration-logo" style="background: linear-gradient(135deg, #000000, #1a1a1a);">
+                            <img src="https://cdn.simpleicons.org/square/white" alt="Square" class="w-10 h-10" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:white;font-size:24px;font-weight:bold\'>□</span>';">
+                        </div>
+                        <span class="integration-name">Square</span>
+                    </div>
+
+                    <!-- Google Analytics -->
+                    <div class="integration-card">
+                        <div class="integration-logo" style="background: linear-gradient(135deg, #F9AB00, #E37400);">
+                            <img src="/images/design-mode/ic_analytics.svg" alt="Google Analytics" class="w-10 h-10" style="filter: brightness(0) invert(1);" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:white;font-size:20px;font-weight:bold\'>GA4</span>';">
+                        </div>
+                        <span class="integration-name">Google Analytics 4</span>
+                    </div>
+
+                    <!-- TikTok Ads -->
+                    <div class="integration-card">
+                        <div class="integration-logo" style="background: linear-gradient(135deg, #000000, #1a1a1a);">
+                            <img src="https://cdn.simpleicons.org/tiktok/white" alt="TikTok" class="w-10 h-10" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:white;font-size:24px;font-weight:bold\'>TT</span>';">
+                        </div>
+                        <span class="integration-name">TikTok Ads</span>
+                    </div>
+
+                    <!-- Amazon Seller Central -->
+                    <div class="integration-card">
+                        <div class="integration-logo" style="background: linear-gradient(135deg, #FF9900, #E68A00);">
+                            <img src="https://cdn.simpleicons.org/amazon/white" alt="Amazon" class="w-10 h-10" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:white;font-size:24px;font-weight:bold\'>A</span>';">
+                        </div>
+                        <span class="integration-name">Amazon Seller Central</span>
+                    </div>
+
+                    <!-- WooCommerce -->
+                    <div class="integration-card">
+                        <div class="integration-logo" style="background: linear-gradient(135deg, #96588A, #7F4675);">
+                            <img src="https://cdn.simpleicons.org/woocommerce/white" alt="WooCommerce" class="w-10 h-10" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:white;font-size:24px;font-weight:bold\'>W</span>';">
+                        </div>
+                        <span class="integration-name">WooCommerce</span>
+                    </div>
+
+                    <!-- Stripe -->
+                    <div class="integration-card">
+                        <div class="integration-logo" style="background: linear-gradient(135deg, #635BFF, #5348E8);">
+                            <img src="https://cdn.simpleicons.org/stripe/white" alt="Stripe" class="w-10 h-10" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:white;font-size:24px;font-weight:bold\'>S</span>';">
+                        </div>
+                        <span class="integration-name">Stripe</span>
+                    </div>
+
+                    <!-- PostgreSQL -->
+                    <div class="integration-card">
+                        <div class="integration-logo" style="background: linear-gradient(135deg, #336791, #2A5578);">
+                            <img src="https://cdn.simpleicons.org/postgresql/white" alt="PostgreSQL" class="w-10 h-10" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:white;font-size:20px;font-weight:bold\'>PG</span>';">
+                        </div>
+                        <span class="integration-name">PostgreSQL</span>
+                    </div>
+
+                    <!-- Coming Soon Placeholder -->
+                    <div class="integration-card" style="opacity: 0.6;">
+                        <div class="integration-logo" style="background: linear-gradient(135deg, #9CA3AF, #6B7280);">
+                            <span style="color:white;font-size:32px;font-weight:300;">+</span>
+                        </div>
+                        <span class="integration-name">More Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wave Divider -->
+        <div class="wave-divider">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="#f8fafc"></path>
+            </svg>
+        </div>
+
+        <section id="features" class="relative bg-gradient-to-b from-white to-slate-50">
+            <div class="max-w-[1400px] mx-auto">
+                <div class="text-center pt-24 pb-16 px-4">
+                    <h2 class="text-5xl md:text-6xl font-bold text-gray-900">Everything you need to <span class="gradient-text">take control</span></h2>
+                    <p class="mt-5 text-xl text-gray-600 font-cyberpunk">Crystal-clear insights, prioritized actions, and beautiful clarity across your numbers.</p>
+                </div>
+
+                <!-- Interactive Showcase Section -->
+                <!-- Feature 1: Chat with Lyn -->
+                <div class="relative px-4 py-10 mb-12">
+                    <div class="max-w-[1600px] mx-auto">
+                        <div class="relative bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 rounded-[2rem] p-12 md:p-20 overflow-hidden shadow-2xl border border-white/50" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-orange-400/20 to-amber-400/20 rounded-full blur-3xl"></div>
+                            <div class="absolute bottom-0 left-0 w-[450px] h-[450px] bg-gradient-to-tr from-yellow-400/20 to-orange-400/20 rounded-full blur-3xl"></div>
+                            
+                            <div class="relative z-10 grid md:grid-cols-[30%_70%] gap-16 items-center">
+                    <div>
+                                    <h2 class="text-[2rem] md:text-[2.25rem] font-semibold text-gray-900 mb-5 leading-[1.15] tracking-tight">Chat with Lyn</h2>
+                                    <p class="text-[0.95rem] md:text-[1rem] text-gray-600 leading-[1.65] font-normal">Your personal AI analyst is available 24/7. Ask complex questions about your business in plain English like "Which ad campaign was most profitable last week?" and get immediate, data-backed answers and suggestions, without ever waiting for a report to be built.</p>
+                    </div>
+                                <div class="relative">
+                                    <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform hover:scale-[1.01] transition-transform duration-500">
+                                        <div class="aspect-[20/9] relative flex items-center justify-center p-2">
+                                            <!-- Blurred background -->
+                                            <div class="absolute inset-0 bg-cover bg-center blur-2xl opacity-40" style="background-image: url('./assets/feature-chat.png');"></div>
+                                            <!-- Sharp image on top -->
+                                            <img src="./assets/feature-chat.png" alt="Chat with Lyn" class="relative z-10 w-full h-full object-contain" onerror="this.style.display='none'">
+                                        </div>
+                                    </div>
+                                    <div class="absolute -bottom-5 -left-5 w-28 h-28 bg-gradient-to-br from-orange-400 to-amber-500 rounded-full blur-3xl opacity-50 animate-pulse"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 2: Weekly Business Report -->
+                <div class="relative px-4 py-10 mb-12">
+                    <div class="max-w-[1600px] mx-auto">
+                        <div class="relative bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 rounded-[2rem] p-12 md:p-20 overflow-hidden shadow-2xl border border-white/50" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl"></div>
+                            <div class="absolute bottom-0 left-0 w-[450px] h-[450px] bg-gradient-to-tr from-pink-400/20 to-orange-400/20 rounded-full blur-3xl"></div>
+                            
+                            <div class="relative z-10 grid md:grid-cols-[30%_70%] gap-16 items-center">
+                    <div>
+                                    <h2 class="text-[2rem] md:text-[2.25rem] font-semibold text-gray-900 mb-5 leading-[1.15] tracking-tight">Weekly Business Report</h2>
+                                    <p class="text-[0.95rem] md:text-[1rem] text-gray-600 leading-[1.65] font-normal">Every Monday, receive a concise executive summary of your business performance. We highlight your biggest wins and the most critical areas needing your attention, so you always know where to focus.</p>
+                        </div>
+                                <div class="relative">
+                                    <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform hover:scale-[1.01] transition-transform duration-500">
+                                        <div class="aspect-[20/9] relative flex items-center justify-center p-2">
+                                            <!-- Blurred background -->
+                                            <div class="absolute inset-0 bg-cover bg-center blur-2xl opacity-40" style="background-image: url('./assets/feature-report.png');"></div>
+                                            <!-- Sharp image on top -->
+                                            <img src="./assets/feature-report.png" alt="Weekly Business Report" class="relative z-10 w-full h-full object-contain" onerror="this.style.display='none'">
+            </div>
+            </div>
+                                    <div class="absolute -bottom-5 -left-5 w-28 h-28 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full blur-3xl opacity-50 animate-pulse"></div>
+            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="relative px-4 py-10 mb-12">
+                    <div class="max-w-[1600px] mx-auto">
+                        <div class="relative bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 rounded-[2rem] p-12 md:p-20 overflow-hidden shadow-2xl border border-white/50" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-green-400/20 to-emerald-400/20 rounded-full blur-3xl"></div>
+                            <div class="absolute bottom-0 left-0 w-[450px] h-[450px] bg-gradient-to-tr from-teal-400/20 to-cyan-400/20 rounded-full blur-3xl"></div>
+                            
+                            <div class="relative z-10 grid md:grid-cols-[30%_70%] gap-16 items-center">
+                    <div>
+                                    <h2 class="text-[2rem] md:text-[2.25rem] font-semibold text-gray-900 mb-5 leading-[1.15] tracking-tight">Business Pulse</h2>
+                                    <p class="text-[0.95rem] md:text-[1rem] text-gray-600 leading-[1.65] font-normal">Get a clean, minimalist view of your core metrics like Revenue, Profit Margin, AOV all in one place. With a reliable forecast, you'll have the situational awareness you need to never fly blind again.</p>
+                        </div>
+                                <div class="relative">
+                                    <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform hover:scale-[1.01] transition-transform duration-500">
+                                        <div class="aspect-[20/9] relative flex items-center justify-center p-2">
+                                            <!-- Blurred background -->
+                                            <div class="absolute inset-0 bg-cover bg-center blur-2xl opacity-40" style="background-image: url('./assets/feature-finance.png');"></div>
+                                            <!-- Sharp image on top -->
+                                            <img src="./assets/feature-finance.png" alt="Business Pulse" class="relative z-10 w-full h-full object-contain" onerror="this.style.display='none'">
+                                        </div>
+                                    </div>
+                                    <div class="absolute -bottom-5 -left-5 w-28 h-28 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full blur-3xl opacity-50 animate-pulse"></div>
+                                </div>
+                            </div>
+                    </div>
+                        </div>
+                    </div>
+                <!-- Feature 3 -->
+                <div class="relative px-4 py-10 mb-12">
+                    <div class="max-w-[1600px] mx-auto">
+                        <div class="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-violet-50 rounded-[2rem] p-12 md:p-20 overflow-hidden shadow-2xl border border-white/50" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-blue-400/20 to-indigo-400/20 rounded-full blur-3xl"></div>
+                            <div class="absolute bottom-0 left-0 w-[450px] h-[450px] bg-gradient-to-tr from-violet-400/20 to-purple-400/20 rounded-full blur-3xl"></div>
+                            
+                            <div class="relative z-10 grid md:grid-cols-[30%_70%] gap-16 items-center">
+                    <div>
+                                    <h2 class="text-[2rem] md:text-[2.25rem] font-semibold text-gray-900 mb-5 leading-[1.15] tracking-tight">Quick Insights</h2>
+                                    <p class="text-[0.95rem] md:text-[1rem] text-gray-600 leading-[1.65] font-normal">Every day, our engine proactively finds the hidden opportunities and risks in your data. We then deliver these as simple, plain-English "Insight Cards" that explain what's happening, why it matters, and what you can do about it.</p>
+                        </div>
+                                <div class="relative">
+                                    <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform hover:scale-[1.01] transition-transform duration-500">
+                                        <div class="aspect-[20/9] relative flex items-center justify-center p-2">
+                                            <!-- Blurred background -->
+                                            <div class="absolute inset-0 bg-cover bg-center blur-2xl opacity-40" style="background-image: url('./assets/feature-briefing.png');"></div>
+                                            <!-- Sharp image on top -->
+                                            <img src="./assets/feature-briefing.png" alt="Quick Insights" class="relative z-10 w-full h-full object-contain" onerror="this.style.display='none'">
+                                        </div>
+                                    </div>
+                                    <div class="absolute -bottom-5 -left-5 w-28 h-28 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full blur-3xl opacity-50 animate-pulse"></div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <!-- Feature 4 -->
+                <div class="relative px-4 py-10 mb-12">
+                    <div class="max-w-[1600px] mx-auto">
+                        <div class="relative bg-gradient-to-br from-purple-50 via-fuchsia-50 to-pink-50 rounded-[2rem] p-12 md:p-20 overflow-hidden shadow-2xl border border-white/50" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-purple-400/20 to-fuchsia-400/20 rounded-full blur-3xl"></div>
+                            <div class="absolute bottom-0 left-0 w-[450px] h-[450px] bg-gradient-to-tr from-pink-400/20 to-rose-400/20 rounded-full blur-3xl"></div>
+                            
+                            <div class="relative z-10 grid md:grid-cols-[30%_70%] gap-16 items-center">
+                    <div>
+                                    <h2 class="text-[2rem] md:text-[2.25rem] font-semibold text-gray-900 mb-5 leading-[1.15] tracking-tight">Weekly Action Plan</h2>
+                                    <p class="text-[0.95rem] md:text-[1rem] text-gray-600 leading-[1.65] font-normal">We automatically transform the most important "Try this" suggestions into a prioritized weekly to-do list. Each task is a step-by-step recipe for action, complete with a simulated impact, giving you the confidence to focus your energy where it matters most.</p>
+                            </div>
+                                <div class="relative">
+                                    <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform hover:scale-[1.01] transition-transform duration-500">
+                                        <div class="aspect-[20/9] relative flex items-center justify-center p-2">
+                                            <!-- Blurred background -->
+                                            <div class="absolute inset-0 bg-cover bg-center blur-2xl opacity-40" style="background-image: url('./assets/feature-plan.png');"></div>
+                                            <!-- Sharp image on top -->
+                                            <img src="./assets/feature-plan.png" alt="Weekly Action Plan" class="relative z-10 w-full h-full object-contain" onerror="this.style.display='none'">
+                            </div>
+                        </div>
+                                    <div class="absolute -bottom-5 -left-5 w-28 h-28 bg-gradient-to-br from-purple-400 to-fuchsia-500 rounded-full blur-3xl opacity-50 animate-pulse"></div>
+                    </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <!-- Wave Divider -->
+        <div class="wave-divider">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#f8fafc"></path>
+            </svg>
+        </div>
+    
+        <!-- Lyn is Always Active Section -->
+        <section class="py-24 px-4 bg-slate-50">
+            <div class="max-w-6xl mx-auto">
+                <!-- Heading -->
+                <div class="text-center mb-16">
+                    <h2 class="text-[3rem] md:text-[4rem] font-bold text-gray-900 mb-6 leading-[1.1] tracking-tight">
+                        <span class="gradient-text">Lyn</span> <span class="text-black">is always active</span>
+                    </h2>
+                    <p class="text-[1.25rem] md:text-[1.5rem] text-gray-600 font-medium">
+                        Your personal AI analyst works 24/7, delivering insights when you need them most
+                    </p>
+                </div>
+
+                <!-- iPhone Mockup -->
+                <div class="flex justify-center">
+                    <div class="relative">
+                        <!-- iPhone Frame -->
+                        <div class="w-[320px] h-[640px] bg-[#1c1c1e] rounded-[40px] p-3 shadow-2xl relative">
+                            <!-- iPhone Screen -->
+                            <div class="w-full h-full bg-cover bg-center rounded-[28px] relative overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80');">
+                                <!-- Dynamic Island -->
+                                <div class="absolute top-3 left-1/2 transform -translate-x-1/2 w-[100px] h-7 bg-[#1c1c1e] rounded-[14px] z-20"></div>
+                                
+                                <!-- Status Bar -->
+                                <div class="absolute top-5 left-0 right-0 flex justify-between items-center px-5 z-10">
+                                    <span class="text-white font-semibold text-sm">10:13</span>
+                                    <div class="flex items-center space-x-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M17.778 8.222c-4.296 0-7.778 3.482-7.778 7.778a2.222 2.222 0 11-4.444 0C5.556 7.042 11.042 1.556 17.778 1.556a.694.694 0 01.694.694v5.972zM17.778 16c-1.23 0-2.222-1-2.222-2.222s1-2.222 2.222-2.222c1.23 0 2.222 1 2.222 2.222s-1 2.222-2.222 2.222z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span class="text-white text-sm">5G</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                            </svg>
+                        </div>
+                                </div>
+                                
+                                <!-- Notifications Stack -->
+                                <div class="absolute top-20 left-4 right-4 space-y-3">
+                                    <!-- Notification 1 -->
+                                    <div class="bg-white/70 backdrop-blur-[20px] border border-white/50 rounded-2xl p-3 shadow-lg" style="backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0">
+                                                <div class="w-5 h-5 rounded-md bg-blue-500 flex items-center justify-center text-white text-[10px] font-bold">L</div>
+                                            </div>
+                                            <div class="ml-2 flex-1">
+                                                <p class="text-xs font-semibold text-black">Lyn</p>
+                                            </div>
+                                            <span class="text-xs text-gray-600">now</span>
+                                        </div>
+                                        <div class="mt-1.5">
+                                            <p class="font-semibold text-black text-xs">A quick question about your numbers</p>
+                                            <p class="text-[0.7rem] text-gray-800 leading-4 mt-1">Hey Sara, I've found something important in your data that I think we should discuss.</p>
+                        </div>
+                    </div>
+
+                                    <!-- Notification 2 -->
+                                    <div class="bg-white/70 backdrop-blur-[20px] border border-white/50 rounded-2xl p-3 shadow-lg" style="backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0">
+                                                <div class="w-5 h-5 rounded-md bg-blue-500 flex items-center justify-center text-white text-[10px] font-bold">L</div>
+                        </div>
+                                            <div class="ml-2 flex-1">
+                                                <p class="text-xs font-semibold text-black">Lyn</p>
+                                            </div>
+                                            <span class="text-xs text-gray-600">15m ago</span>
+                                        </div>
+                                        <div class="mt-1.5">
+                                            <p class="font-semibold text-black text-xs">New Insight: Found a pattern in your reviews</p>
+                                            <p class="text-[0.7rem] text-gray-800 leading-4 mt-1">Multiple recent 5-star reviews for the 'Classic Leather Tote' also mention your fast shipping.</p>
+                        </div>
+                    </div>
+
+                                    <!-- Notification 3 -->
+                                    <div class="bg-white/70 backdrop-blur-[20px] border border-white/50 rounded-2xl p-3 shadow-lg" style="backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0">
+                                                <div class="w-5 h-5 rounded-md bg-blue-500 flex items-center justify-center text-white text-[10px] font-bold">L</div>
+                        </div>
+                                            <div class="ml-2 flex-1">
+                                                <p class="text-xs font-semibold text-black">Lyn</p>
+                                            </div>
+                                            <span class="text-xs text-gray-600">1h ago</span>
+                                        </div>
+                                        <div class="mt-1.5">
+                                            <p class="font-semibold text-black text-xs">Inventory Alert: Bestseller running low</p>
+                                            <p class="text-[0.7rem] text-gray-800 leading-4 mt-1">Just a heads-up, you only have 3 units left of your #1 product, the 'Classic Leather Tote'.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+
+                        <!-- Decorative Elements -->
+                        <div class="absolute -top-8 -right-8 w-16 h-16 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-xl"></div>
+                        <div class="absolute -bottom-8 -left-8 w-20 h-20 bg-gradient-to-br from-pink-400/20 to-orange-400/20 rounded-full blur-xl"></div>
+                    </div>
+                </div>
+
+                <!-- Bottom Text -->
+                <div class="text-center mt-16">
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                        From personal insights to operational alerts, Lyn keeps you informed with the most relevant information about your business, exactly when you need it.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-24 px-4 bg-white" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-20">
+                    <h2 class="text-[2.75rem] md:text-[3.5rem] font-bold text-gray-900 mb-4 leading-[1.1] tracking-tight">FAQs</h2>
+                    <p class="text-[1.125rem] text-gray-600">Everything you need to know about Lynlytics</p>
+                </div>
+
+                <div class="space-y-0">
+                    <div class="faq-item-modern group">
+                        <button class="faq-question-modern w-full py-8 flex items-start justify-between text-left border-t border-gray-200 transition-colors hover:border-gray-300">
+                            <h3 class="text-[1.375rem] md:text-[1.5rem] font-semibold text-gray-900 pr-8 leading-[1.3]">What makes Lynlytics different from traditional BI tools?</h3>
+                            <svg class="faq-icon-modern w-7 h-7 text-gray-900 flex-shrink-0 transition-transform duration-300" viewBox="0 0 30 30" fill="currentColor">
+                                <path d="M16.139 13V0h-2.167v13h-13v2.167h13v13h2.167v-13h13V13h-13Z"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer-modern overflow-hidden transition-all duration-300">
+                            <p class="text-[1rem] md:text-[1.0625rem] text-gray-600 leading-[1.7] pb-8">Traditional BI tools are powerful reporting systems built for data analysts. They excel at visualizing what happened, but leave you to figure out why it happened and what to do next. Lynlytics is fundamentally different. We are an Actionable Intelligence Engine built for business owners. Our AI doesn't just give you charts; it analyzes your data, finds the critical insights, and delivers a simple, prioritized to-do list for the week. We close the gap between data and decision.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item-modern group">
+                        <button class="faq-question-modern w-full py-8 flex items-start justify-between text-left border-t border-gray-200 transition-colors hover:border-gray-300">
+                            <h3 class="text-[1.375rem] md:text-[1.5rem] font-semibold text-gray-900 pr-8 leading-[1.3]">How long does it take to set up?</h3>
+                            <svg class="faq-icon-modern w-7 h-7 text-gray-900 flex-shrink-0 transition-transform duration-300" viewBox="0 0 30 30" fill="currentColor">
+                                <path d="M16.139 13V0h-2.167v13h-13v2.167h13v13h2.167v-13h13V13h-13Z"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer-modern overflow-hidden transition-all duration-300">
+                            <p class="text-[1rem] md:text-[1.0625rem] text-gray-600 leading-[1.7] pb-8">You can be set up and see your first insights in under 10 minutes. The process is simple: you securely connect your data sources (like Shopify or Meta Ads) through our embedded portal, and our AI gets to work. There are no complex configurations or data models to build. In fact, your "Initial Business Report" is often ready within minutes of connecting your data, providing immediate value.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item-modern group">
+                        <button class="faq-question-modern w-full py-8 flex items-start justify-between text-left border-t border-gray-200 transition-colors hover:border-gray-300">
+                            <h3 class="text-[1.375rem] md:text-[1.5rem] font-semibold text-gray-900 pr-8 leading-[1.3]">Is my data secure?</h3>
+                            <svg class="faq-icon-modern w-7 h-7 text-gray-900 flex-shrink-0 transition-transform duration-300" viewBox="0 0 30 30" fill="currentColor">
+                                <path d="M16.139 13V0h-2.167v13h-13v2.167h13v13h2.167v-13h13V13h-13Z"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer-modern overflow-hidden transition-all duration-300">
+                            <p class="text-[1rem] md:text-[1.0625rem] text-gray-600 leading-[1.7] pb-8">Yes, absolutely. Your data security and privacy are built into the core of our architecture. Our system is designed with two fundamental principles:<br><br><strong>Privacy by Design:</strong> Our AI agents reason using only anonymized metadata and business rules. Your raw, sensitive customer and financial data is never sent to a third-party LLM.<br><br><strong>Verifiable Accuracy:</strong> All mathematical calculations are performed exclusively by our proprietary, VRAE-verified analytics core. We double-check the numbers so you can trust every insight.</p>
+                        </div>
+                        </div>
+
+                    <div class="faq-item-modern group">
+                        <button class="faq-question-modern w-full py-8 flex items-start justify-between text-left border-t border-gray-200 transition-colors hover:border-gray-300">
+                            <h3 class="text-[1.375rem] md:text-[1.5rem] font-semibold text-gray-900 pr-8 leading-[1.3]">What size business is Lynlytics built for?</h3>
+                            <svg class="faq-icon-modern w-7 h-7 text-gray-900 flex-shrink-0 transition-transform duration-300" viewBox="0 0 30 30" fill="currentColor">
+                                <path d="M16.139 13V0h-2.167v13h-13v2.167h13v13h2.167v-13h13V13h-13Z"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer-modern overflow-hidden transition-all duration-300">
+                            <p class="text-[1rem] md:text-[1.0625rem] text-gray-600 leading-[1.7] pb-8">Lynlytics is designed from the ground up for Small and Medium-sized Businesses (SMBs). Our ideal customer is the busy founder or operator who doesn't have a dedicated team of data analysts. If you are an expert in your business but lack the time or tools to perform deep data analysis, Lynlytics is built for you. We automate the work of an analyst and deliver the simple, actionable plan you need to grow.</p>
+                    </div>
+                </div>
+
+                    <div class="faq-item-modern group">
+                        <button class="faq-question-modern w-full py-8 flex items-start justify-between text-left border-t border-b border-gray-200 transition-colors hover:border-gray-300">
+                            <h3 class="text-[1.375rem] md:text-[1.5rem] font-semibold text-gray-900 pr-8 leading-[1.3]">Do I need technical expertise to use Lynlytics?</h3>
+                            <svg class="faq-icon-modern w-7 h-7 text-gray-900 flex-shrink-0 transition-transform duration-300" viewBox="0 0 30 30" fill="currentColor">
+                                <path d="M16.139 13V0h-2.167v13h-13v2.167h13v13h2.167v-13h13V13h-13Z"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer-modern overflow-hidden transition-all duration-300">
+                            <p class="text-[1rem] md:text-[1.0625rem] text-gray-600 leading-[1.7] pb-8">No, absolutely not. That is the core problem we solve. You don't need any technical expertise, knowledge of SQL, BI tool or experience with data analysis to use Lynlytics. Our platform is designed to handle all the complexity for you. All insights and to-do lists are delivered in plain English, so you can focus on running your business, not on becoming a Business Analyst.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-16 text-center">
+                    <p class="text-[1.0625rem] text-gray-600">Still have questions? <a href="mailto:hello@lynlytics.com" class="font-semibold hover:underline text-gray-900 transition-colors">Get in touch</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wave Divider -->
+        <div class="wave-divider">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="#ffffff"></path>
+            </svg>
+        </div>
+
+        <section class="relative py-24 px-4 bg-slate-50">
+            <div class="hero-bg" style="opacity:0.7"></div>
+            <div class="max-w-4xl mx-auto text-center relative z-10">
+                <h2 class="text-4xl md:text-5xl font-extrabold">Ready to stop guessing and start growing?</h2>
+                <p class="mt-6 text-xl text-gray-600">Activate your intelligence engine today and get the clarity to move forward.</p>
+                <div class="mt-10">
+                    <form action="https://formspree.io/f/mnngbzbv" method="POST" class="flex flex-col sm:flex-row gap-4 items-center justify-center max-w-md mx-auto">
+                        <input type="email" name="email" placeholder="Enter Your Email" required class="flex-1 px-6 py-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-500">
+                        <button type="submit" class="magnetic-btn px-8 py-4 rounded-full bg-black text-white font-medium text-base ring-hover inline-block whitespace-nowrap">Join Waitlist</button>
+                    </form>
+                </div>
+                
+                <!-- Social Media Links -->
+                <div class="mt-12 flex justify-center space-x-6">
+                    <a href="https://www.linkedin.com/company/lynlytics/" target="_blank" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="https://x.com/lynlytics" target="_blank" class="text-gray-600 hover:text-black transition-colors duration-200">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/lynlytics/" target="_blank" class="text-gray-600 hover:text-pink-600 transition-colors duration-200">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.297-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.807.875 1.297 2.026 1.297 3.323s-.49 2.448-1.297 3.323c-.875.807-2.026 1.297-3.323 1.297zm7.83-9.281c-.49 0-.875-.385-.875-.875s.385-.875.875-.875.875.385.875.875-.385.875-.875.875zm-7.83 1.297c-1.297 0-2.448.49-3.323 1.297-.807.875-1.297 2.026-1.297 3.323s.49 2.448 1.297 3.323c.875.807 2.026 1.297 3.323 1.297s2.448-.49 3.323-1.297c.807-.875 1.297-2.026 1.297-3.323s-.49-2.448-1.297-3.323c-.875-.807-2.026-1.297-3.323-1.297z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-100">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-500">&copy; 2025 Lynlytics. All rights reserved.</p>
+             <div class="mt-4 flex justify-center space-x-6">
+                <a href="#" class="text-gray-500 hover:text-gray-700">Privacy Policy</a>
+                <a href="#" class="text-gray-500 hover:text-gray-700">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // SMB Animation
+            const smbElement = document.getElementById('smb-animation');
+            const industries = [
+                "DTC Brands", "SaaS Startups", "Independent Retailers", "Restaurant Brands",
+                "Creative Agencies", "Media Brands", "Wellness Studios", "Real Estate Agencies",
+                "Professional Services", "Subscription Businesses", "Hospitality Groups", "Home Service Pros"
+            ];
+            let currentIndex = 0;
+
+            setInterval(() => {
+                smbElement.classList.add('fade-out');
+                
+                setTimeout(() => {
+                    currentIndex = (currentIndex + 1) % industries.length;
+                    smbElement.textContent = industries[currentIndex];
+                    smbElement.classList.remove('fade-out');
+                }, 300); // Corresponds to fade-out transition time
+            }, 1000); // Change every second
+
+            // Scroll Progress Bar
+            window.addEventListener('scroll', () => {
+                const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (window.scrollY / windowHeight) * 100;
+                document.getElementById('scroll-progress').style.width = scrolled + '%';
+            });
+            
+            // Mobile Menu
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+            
+            function openMobileMenu() {
+                mobileMenu.classList.add('active');
+                mobileMenuOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeMobileMenu() {
+                mobileMenu.classList.remove('active');
+                mobileMenuOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            
+            mobileMenuBtn.addEventListener('click', openMobileMenu);
+            mobileMenuClose.addEventListener('click', closeMobileMenu);
+            mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+            
+            // Close menu when clicking a link
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    closeMobileMenu();
+                });
+            });
+
+            // FAQ accordion
+            const faqItems = document.querySelectorAll('.faq-item-modern');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question-modern');
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all other FAQs
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current FAQ
+                    if (isActive) {
+                        item.classList.remove('active');
+                    } else {
+                        item.classList.add('active');
+                    }
+                });
+            });
+            
+            // Magnetic Button Effect
+            const magneticButtons = document.querySelectorAll('.magnetic-btn');
+            
+            magneticButtons.forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    
+                    btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+                });
+                
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = 'translate(0, 0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

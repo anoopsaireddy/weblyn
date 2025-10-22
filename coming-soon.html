@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Coming Soon | Lynlytics</title>
+    <meta name="description" content="Lynlytics is launching soon. Building something thoughtful takes time.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #ffffff;
+            color: #1d1d1f;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            background: #f5f5f7;
+            border-radius: 18px;
+            padding: 4rem 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            animation: fadeIn 1.2s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Main Heading */
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            color: #1d1d1f;
+        }
+        
+        /* Subheading */
+        .subtitle {
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            font-weight: 400;
+            line-height: 1.5;
+            color: #86868b;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+        
+        /* Countdown Container */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 4rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 100px;
+        }
+        
+        .countdown-number {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 600;
+            line-height: 1;
+            color: #1d1d1f;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .countdown-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #86868b;
+        }
+        
+        /* Separator between countdown items */
+        .countdown-separator {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            color: #d2d2d7;
+            display: flex;
+            align-items: center;
+            padding-bottom: 2rem;
+        }
+        
+        /* Footer note */
+        .footer-note {
+            margin-top: 5rem;
+            font-size: 0.938rem;
+            color: #86868b;
+            font-weight: 400;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 3rem 2rem;
+            }
+            
+            .countdown-container {
+                gap: 1.5rem;
+                margin: 3rem 0;
+            }
+            
+            .countdown-item {
+                min-width: 80px;
+            }
+            
+            .countdown-separator {
+                display: none;
+            }
+            
+            .footer-note {
+                margin-top: 3rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 1.5rem;
+            }
+            
+            .container {
+                padding: 2.5rem 1.5rem;
+            }
+            
+            .countdown-container {
+                gap: 1rem;
+            }
+            
+            .countdown-item {
+                min-width: 70px;
+            }
+        }
+        
+        /* Smooth transitions */
+        .countdown-number {
+            transition: transform 0.3s ease;
+        }
+        
+        /* Subtle hover effect on countdown */
+        .countdown-item:hover .countdown-number {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>We're Almost Ready</h1>
+        
+        <p class="subtitle">
+            Building something thoughtful takes time. We'll be with you soon.
+        </p>
+        
+        <div class="countdown-container">
+            <div class="countdown-item">
+                <div class="countdown-number" id="days">00</div>
+                <div class="countdown-label">Days</div>
+            </div>
+            
+            <div class="countdown-separator">:</div>
+            
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">00</div>
+                <div class="countdown-label">Hours</div>
+            </div>
+            
+            <div class="countdown-separator">:</div>
+            
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">00</div>
+                <div class="countdown-label">Minutes</div>
+            </div>
+            
+            <div class="countdown-separator">:</div>
+            
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">00</div>
+                <div class="countdown-label">Seconds</div>
+            </div>
+        </div>
+        
+        <p class="footer-note">
+            Thank you for your patience.
+        </p>
+    </div>
+    
+    <script>
+        // COUNTDOWN TIMER v2.0 - Updated Oct 2, 2025
+        // Set fixed launch date - Update this date as needed
+        // Format: Year, Month (0-11), Day, Hour, Minute, Second
+        const launchDate = new Date(2025, 9, 22, 23, 59, 59); // October 22, 2025 at 11:59:59 PM
+        
+        // Debug: Log the target date and current calculation
+        console.log('Launch Date:', launchDate.toLocaleString());
+        console.log('Days until launch:', Math.floor((launchDate - new Date()) / (1000 * 60 * 60 * 24)))
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = launchDate.getTime() - now;
+            
+            // Calculate time units
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Update the display
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            
+            // If countdown is finished
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.querySelector('h1').textContent = "We're Here";
+                document.querySelector('.subtitle').textContent = "Welcome to Lynlytics.";
+                document.querySelector('.countdown-container').style.display = 'none';
+            }
+        }
+        
+        // Update countdown immediately and then every second
+        updateCountdown();
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
