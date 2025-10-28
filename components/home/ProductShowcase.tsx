@@ -1154,7 +1154,7 @@ const ProductShowcase = () => {
                   <div className="absolute bottom-0 left-0 w-20 h-20 sm:w-28 sm:h-28 bg-gradient-to-tr from-pink-400/20 to-rose-400/20 rounded-full blur-2xl"></div>
                   
                   {/* Widget Content */}
-                  <div className="relative bg-white border border-gray-200 rounded-lg sm:rounded-xl shadow-lg overflow-hidden mb-4 sm:mb-6" style={{ height: '250px' }}>
+                  <div className="relative bg-white border border-gray-200 rounded-lg sm:rounded-xl shadow-lg overflow-hidden mb-4 sm:mb-6" style={{ height: '300px' }}>
                     <div className="h-full overflow-hidden">
                       <div className="h-full bg-white">
                         {/* Chat Header */}
@@ -1199,7 +1199,7 @@ const ProductShowcase = () => {
                     <h4 className="text-lg font-bold text-gray-900 mb-2">Chat with Lyn</h4>
                     <p className="text-sm text-blue-600 font-semibold mb-2">Your personal AI analyst is available 24/7</p>
                     <p className="text-xs text-gray-600 leading-relaxed">
-                      Ask complex questions about your business in plain English like "Which ad campaign was most profitable last week?" and get immediate, data-backed answers and suggestions, without ever waiting for a report to be built.
+                      Ask complex questions about your business in plain English like "Which ad campaign was most profitable last week?" and get immediate, data-backed answers and suggestions, without ever waiting for a report.
                     </p>
                   </div>
                 </div>
