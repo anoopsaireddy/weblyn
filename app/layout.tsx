@@ -27,7 +27,12 @@ export const metadata: Metadata = {
   title: "Lynlytics | Your Actionable Intelligence Engine",
   description:
     "Lynlytics is the actionable intelligence engine for SMBs. We turn your complex business data into a simple, prioritized action plan to drive growth.",
-    generator: 'v0.app'
+  generator: 'v0.app',
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.ico',
+    apple: '/LC.png',
+  },
 }
 
 export default function RootLayout({
@@ -37,6 +42,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth leading-3">
+      <head>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/LC.png" />
+      </head>
       <body className={`${inter.variable} ${interDisplay.variable} ${dmSans.variable} ${GeistSans.variable} antialiased`}>{children}</body>
     </html>
   )

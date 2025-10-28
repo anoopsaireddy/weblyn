@@ -12,25 +12,25 @@ export default function DashboardsSection() {
 
   const features = [
     {
-      title: "INSTANT ANSWERS",
+      title: "Instant Answers",
       description: "Get immediate, data-backed answers with actionable recommendations.",
       icon: "💬",
       color: "blue"
     },
     {
-      title: "CONTEXTUAL UNDERSTANDING", 
+      title: "Contextual Understanding", 
       description: "Lyn remembers your business context and provides personalized insights.",
       icon: "📊",
       color: "gray"
     },
     {
-      title: "FIND HIDDEN INSIGHTS",
+      title: "Find Hidden Insights",
       description: "Monitors your business 24/7 and uncovers deep insights explaining the why behind your numbers.",
       icon: "🔍",
       color: "green"
     },
     {
-      title: "GIVES ADVICES",
+      title: "Gives Advices",
       description: "Turns key insights into advices and clear weekly actions with step-by-step guidance for confident execution.",
       icon: "📝",
       color: "purple"
@@ -65,7 +65,7 @@ export default function DashboardsSection() {
 
         {/* Features Container with Gradient Background */}
         <div className="relative bg-gradient-to-r from-blue-50/60 via-purple-50/40 to-pink-50/30 rounded-2xl p-8 shadow-lg border border-gray-100/50">
-          <div className="space-y-4">
+          <div className="space-y-6">
             {features.map((feature, index) => (
               <div
                 key={index}
@@ -73,31 +73,32 @@ export default function DashboardsSection() {
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
                 }`}
               >
-                {/* Rectangle Card */}
-                <div className="relative bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-sm hover:shadow-md transition-all duration-500 group-hover:-translate-y-1 border border-gray-100/30">
-                  <div className="flex items-center gap-4">
-                    {/* Icon */}
-                    <div className="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center text-lg flex-shrink-0">
-                      {feature.icon}
-                    </div>
+                {/* Simple Text with Line */}
+                <div className="flex items-center gap-4">
+                  {/* Icon */}
+                  <div className="w-8 h-8 bg-gray-100 rounded-md flex items-center justify-center text-sm flex-shrink-0">
+                    {feature.icon}
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="flex items-center gap-3 flex-grow">
+                    {/* Title */}
+                    <h3 className="text-lg font-semibold text-gray-900 leading-tight tracking-tight w-64">
+                      {feature.title}
+                    </h3>
                     
-                    {/* Content */}
-                    <div className="flex items-center gap-3 flex-grow">
-                      {/* Title */}
-                      <h3 className="text-lg font-semibold text-blue-600 leading-tight tracking-tight w-64">
-                        {feature.title}
-                      </h3>
-                      
-                      {/* Separator */}
-                      <span className="text-gray-300">-</span>
-                      
-                      {/* Description */}
-                      <p className="text-gray-800 leading-relaxed text-base text-left flex-grow">
-                        {feature.description}
-                      </p>
-                    </div>
+                    {/* Separator */}
+                    <span className="text-gray-300">-</span>
+                    
+                    {/* Description */}
+                    <p className="text-gray-800 leading-relaxed text-base text-left flex-grow">
+                      {feature.description}
+                    </p>
                   </div>
                 </div>
+                
+                {/* Line underneath */}
+                <div className="mt-3 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
               </div>
             ))}
           </div>
