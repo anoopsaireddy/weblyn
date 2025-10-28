@@ -5,43 +5,47 @@ import { useState, useEffect } from 'react'
 // Typewriter Effect Component for Weekly Business Report
 const TypewriterReport = () => {
   const [displayedText, setDisplayedText] = useState("")
-  const [currentIndex, setCurrentIndex] = useState(0)
   const [showCursor, setShowCursor] = useState(true)
+  const [currentSegment, setCurrentSegment] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(0)
   
-  const fullText = `Executive Summary: SpenceCart
+  const segments = [
+    `Hi Sara, welcome to Lynlytics.
 
-Welcome, Sara. We've completed the initial analysis of your connected data sources. Overall, SpenceCart is demonstrating strong top-line growth, with revenue increasing by a healthy 28.5% year-over-year. However, this growth has come at the cost of declining profitability, with your overall profit margin dropping by 3.1%. Our initial findings suggest the key areas to focus on are optimizing ad spend efficiency and addressing product return rates to improve your bottom line.
+I've just finished my first deep dive into SpenceCart's data, and the first thing I noticed is that you are doing a fantastic job growing your brand, a 28.5% jump in year over year revenue is a huge accomplishment and shows you have a product people love.
 
-At a Glance: Your 12-Month Performance
-Total Revenue: $1.24M
-A strong indicator of healthy market demand and brand growth.
-
-Profit Margin: 18.2%
-Declining slightly; a key area for optimization to ensure sustainable growth.
-
-Avg. Order Value (AOV): $128.50
-Increasing year-over-year, showing strong customer trust.
-
-Key Strengths
-Strong Revenue Growth: Your total revenue of $1.24M is impressive, driven by a 15% increase in total orders and a healthy rise in AOV.
-Breakout Product Success: The "Classic Leather Tote" is a clear winner, driving 35% of total sales and likely acting as a major source of new customer acquisition.
+The challenge I'm seeing and this is an incredibly common one for high growth brands is that this rapid growth appears to be hiding a profitability problem. While sales are up, your overall profit margin has actually decreased by 3.1%.
+This often happens when operational costs, like ad spend and the cost of returns, scale faster than revenue. My analysis suggests these are the exact two areas we should focus on together.`,
+    
+    `Key Strengths
+• Strong Revenue Growth: Your total revenue of $1.24M is impressive, driven by a 15% increase in total orders and a healthy rise in AOV.
+• Breakout Product Success: The "Classic Leather Tote" is a clear winner, driving 35% of total sales and likely acting as a major source of new customer acquisition.
 
 Immediate Opportunities
-Improve Ad Spend Efficiency: Our analysis indicates some ad campaigns, particularly for the high-volume "Elegant Silk Scarf", may have a low profit margin. Optimizing these could significantly boost your bottom line.
-Reduce High Return Rate: The "New Silk Blouse" has an unusually high return rate (30%). Addressing potential sizing issues could reclaim lost revenue.`
+• Improve Ad Spend Efficiency: Our analysis indicates some ad campaigns, particularly for the high-volume "Elegant Silk Scarf", may have a low profit margin. Optimizing these could significantly boost your bottom line.
+• Reduce High Return Rate: The "New Silk Blouse" has an unusually high return rate (30%).`
+  ]
 
   useEffect(() => {
+    const currentText = segments[currentSegment]
+    
     const timer = setInterval(() => {
-      if (currentIndex < fullText.length) {
-        setDisplayedText(fullText.slice(0, currentIndex + 1))
-        setCurrentIndex(currentIndex + 1)
+      if (currentIndex < currentText.length) {
+        setDisplayedText(currentText.slice(0, currentIndex + 1))
+        setCurrentIndex(prev => prev + 1)
       } else {
+        // Segment finished, clear timer and wait
         clearInterval(timer)
+        setTimeout(() => {
+          setDisplayedText("")
+          setCurrentIndex(0)
+          setCurrentSegment(prev => (prev + 1) % segments.length)
+        }, 1000) // Reduced wait time to 1 second
       }
-    }, 30) // Typing speed: 30ms per character
+    }, 50) // Typing speed: 50ms per character
 
     return () => clearInterval(timer)
-  }, [currentIndex, fullText])
+  }, [currentIndex, currentSegment])
 
   useEffect(() => {
     const cursorTimer = setInterval(() => {
@@ -52,10 +56,10 @@ Reduce High Return Rate: The "New Silk Blouse" has an unusually high return rate
   }, [])
 
   return (
-    <div className="h-full overflow-y-auto">
-      <div className="text-xs text-gray-800 leading-relaxed whitespace-pre-wrap font-mono">
+    <div className="h-full bg-gradient-to-br from-blue-50/30 via-purple-50/20 to-pink-50/10 overflow-hidden">
+      <div className="text-xs text-slate-700 font-medium leading-relaxed whitespace-pre-wrap h-full p-3">
         {displayedText}
-        <span className={`inline-block w-1 h-4 bg-gray-800 ml-1 ${showCursor ? 'opacity-100' : 'opacity-0'}`}>
+        <span className={`inline-block w-1 h-3 bg-slate-500 ml-1 ${showCursor && displayedText.length > 0 ? 'opacity-100' : 'opacity-0'}`}>
           |
         </span>
       </div>
@@ -163,7 +167,7 @@ const FloatingBarComponent = () => {
       tag: { text: "DISCOVERING", bg: "bg-purple-100", text_color: "text-purple-800" },
     },
     {
-      main: "Preparing your next intelligence briefing...",
+      main: "Preparing your next steps...",
       secondary: "Found some interesting insights I'm preparing for you now.",
       tag: { text: "PREPARING", bg: "bg-gray-200", text_color: "text-gray-700" },
     },
@@ -500,10 +504,7 @@ const Sidebar = () => {
     <aside className="w-64 flex-shrink-0 bg-white border-r border-gray-200 flex flex-col">
                 <div className="h-16 flex items-center justify-center px-4 border-b border-gray-200">
                   <div className="flex items-center space-x-2">
-                    <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                      <span className="text-white font-bold text-sm">L</span>
-                    </div>
-                    <h1 className="text-xl font-bold text-slate-900">Lynlytics</h1>
+                    <h1 className="text-xl font-bold text-blue-600">Lynlytics</h1>
                   </div>
                 </div>
 
@@ -556,36 +557,36 @@ const FullDashboardComponent = () => {
   const insights = [
     {
       id: 1,
-      title: 'Your Bestseller May Be a "Vanity Metric."',
+      title: 'Your Bestseller May Be a Vanity Metric.',
       content: {
-        what: 'Your "Elegant Silk Scarf" is your #2 product by revenue, but after accounting for its high Meta Ad spend ($2,500 last month), its final profit was only $50.',
+        what: 'Your Elegant Silk Scarf is your #2 product by revenue, but after accounting for its high Meta Ad spend ($2,500 last month), its final profit was only $50.',
         why: "You are spending a huge amount of effort and money to promote a product that is barely profitable. This budget could be reallocated to a product with a higher margin.",
-        care: "This low-profit product is draining your advertising budget and preventing you from scaling more profitable items. Every dollar spent here could generate 5x more profit elsewhere.",
-        try: 'Consider reducing the Meta Ads budget for the "Elegant Silk Scarf" by 25% and reallocating that budget to your "Classic Leather Tote," which has a much higher profit margin.',
+        care: "This low profit product is draining your advertising budget and preventing you from scaling more profitable items. Every dollar spent here could generate 5x more profit elsewhere.",
+        try: 'Consider reducing the Meta Ads budget for the Elegant Silk Scarf by 25% and reallocating that budget to your Classic Leather Tote, which has a much higher profit margin.',
       },
       confidence: "High",
       confidenceColor: "bg-green-100 text-green-800",
     },
     {
       id: 2,
-      title: 'High Returns on the "New Silk Blouse"?',
+      title: 'High Returns on the New Silk Blouse?',
       content: {
-        what: 'The "New Silk Blouse" has a 30% return rate on Shopify, which is significantly higher than your store average of 8%.',
-        why: 'We scanned your product reviews from Google and found multiple comments mentioning that the "sizing runs small" or it "didn\'t fit as expected". The issue seems to be a mismatch in customer expectations.',
+        what: 'The New Silk Blouse has a 30% return rate on Shopify, which is significantly higher than your store average of 8%.',
+        why: 'We scanned your product reviews from Google and found multiple comments mentioning that the sizing runs small or it didn\'t fit as expected. The issue seems to be a mismatch in customer expectations.',
         care: "High return rates damage your brand reputation, increase operational costs, and reduce customer lifetime value. This could lead to negative reviews and decreased trust.",
-        try: 'Update the product description on your Shopify page with a detailed sizing chart and a note that says, "This item has a slim fit; consider sizing up."',
+        try: 'Update the product description on your Shopify page with a detailed sizing chart and a note that says, This item has a slim fit; consider sizing up.',
       },
       confidence: "High",
       confidenceColor: "bg-green-100 text-green-800",
     },
     {
       id: 3,
-      title: 'Wasted Ad Spend Alert: "Leather Handbag" is Low in Stock.',
+      title: 'Wasted Ad Spend Alert: Leather Handbag is Low in Stock.',
       content: {
-        what: 'You are actively spending money on a Google Ads campaign for your "Classic Leather Handbag," but your Shopify inventory shows you only have 3 units left.',
+        what: 'You are actively spending money on a Google Ads campaign for your Classic Leather Handbag, but your Shopify inventory shows you only have 3 units left.',
         why: "This is likely an operational oversight where the ad campaign was left running while inventory has dwindled.",
         care: "You are paying to send interested customers to a product page that will soon be sold out. This creates a poor customer experience and wastes your advertising budget.",
-        try: 'Pause the Google Ads campaign for the "Classic Leather Handbag" immediately. Reactivate it once you\'ve restocked your inventory.',
+        try: 'Pause the Google Ads campaign for the Classic Leather Handbag immediately. Reactivate it once you\'ve restocked your inventory.',
       },
       confidence: "High",
       confidenceColor: "bg-green-100 text-green-800",
@@ -594,7 +595,7 @@ const FullDashboardComponent = () => {
       id: 4,
       title: "Are You Paying to Send Customers to Amazon?",
       content: {
-        what: 'When you increased your Google Ads budget for "SpenceCart Shoes" last week, sales for that product on Amazon increased by 25%, while sales on your own Shopify store were flat.',
+        what: 'When you increased your Google Ads budget for SpenceCart Shoes last week, sales for that product on Amazon increased by 25%, while sales on your own Shopify store were flat.',
         why: "Customers are searching for your brand on Google and clicking your ad, but then searching for the same product on Amazon to get Prime shipping or compare prices before buying.",
         care: "You are paying Google to acquire customers, but Amazon is getting the sale and the higher-margin profit that should be yours. This creates a leak in your customer acquisition funnel.",
         try: "Add unique value propositions to your product page like 'Exclusive colors only available here' or 'Free express shipping' to differentiate from Amazon.",
@@ -861,6 +862,65 @@ const ActionPlanComponent = () => {
 
 // Health Component (adapted from lynlyticsdemo)
 const HealthComponent = () => {
+  const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0)
+  
+  const healthCategories = [
+    {
+      name: "Financial Health",
+      status: "Good",
+      statusColor: "text-green-600",
+      statusBg: "bg-green-100",
+      metrics: [
+        { label: "Profit Margin", value: "Stable" },
+        { label: "Cash Flow", value: "Positive" },
+        { label: "Expense Ratio", value: "Healthy" }
+      ]
+    },
+    {
+      name: "Sales Health", 
+      status: "Excellent",
+      statusColor: "text-green-600",
+      statusBg: "bg-green-100",
+      metrics: [
+        { label: "Revenue Growth", value: "Strong Growth" },
+        { label: "New vs Returning", value: "30% Returning" },
+        { label: "Avg. Order Value", value: "Increasing" }
+      ]
+    },
+    {
+      name: "Marketing Health",
+      status: "Needs Attention", 
+      statusColor: "text-orange-600",
+      statusBg: "bg-orange-100",
+      metrics: [
+        { label: "ROAS", value: "Declining (2.5x)" },
+        { label: "Acquisition Cost", value: "Increasing" },
+        { label: "Conversion Rate", value: "Stable" }
+      ]
+    },
+    {
+      name: "Customer Health",
+      status: "Good",
+      statusColor: "text-green-600", 
+      statusBg: "bg-green-100",
+      metrics: [
+        { label: "Avg. Review Score", value: "4.6 / 5.0" },
+        { label: "Return Rate", value: "Low (8%)" },
+        { label: "Customer Churn", value: "Very Low" }
+      ]
+    }
+  ]
+
+  const currentCategory = healthCategories[currentCategoryIndex]
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentCategoryIndex(prev => (prev + 1) % healthCategories.length)
+    }, 3000) // Change category every 3 seconds
+
+    return () => clearInterval(timer)
+  }, [healthCategories.length])
+
   return (
     <div className="bg-white border border-slate-300 rounded-2xl p-6 shadow-2xl shadow-slate-300/50 max-w-4xl mx-auto">
       <div className="mb-6">
@@ -930,6 +990,72 @@ const HealthComponent = () => {
 }
 
 const ProductShowcase = () => {
+  const [currentPairIndex, setCurrentPairIndex] = useState(0)
+  
+  const healthCategories = [
+    {
+      name: "Financial Health",
+      status: "Good",
+      statusColor: "text-green-600",
+      statusBg: "bg-green-100",
+      metrics: [
+        { label: "Profit Margin", value: "Stable" },
+        { label: "Cash Flow", value: "Positive" },
+        { label: "Expense Ratio", value: "Healthy" }
+      ]
+    },
+    {
+      name: "Sales Health", 
+      status: "Excellent",
+      statusColor: "text-green-600",
+      statusBg: "bg-green-100",
+      metrics: [
+        { label: "Revenue Growth", value: "Strong Growth" },
+        { label: "New vs Returning", value: "30% Returning" },
+        { label: "Avg. Order Value", value: "Increasing" }
+      ]
+    },
+    {
+      name: "Marketing Health",
+      status: "Needs Attention", 
+      statusColor: "text-orange-600",
+      statusBg: "bg-orange-100",
+      metrics: [
+        { label: "ROAS", value: "Declining (2.5x)" },
+        { label: "Acquisition Cost", value: "Increasing" },
+        { label: "Conversion Rate", value: "Stable" }
+      ]
+    },
+    {
+      name: "Customer Health",
+      status: "Good",
+      statusColor: "text-green-600", 
+      statusBg: "bg-green-100",
+      metrics: [
+        { label: "Avg. Review Score", value: "4.6 / 5.0" },
+        { label: "Return Rate", value: "Low (8%)" },
+        { label: "Customer Churn", value: "Very Low" }
+      ]
+    }
+  ]
+
+  // Create pairs of health categories for cycling
+  const healthPairs = [
+    [0, 1], // Financial Health + Sales Health
+    [2, 3], // Marketing Health + Customer Health
+    [0, 2], // Financial Health + Marketing Health
+    [1, 3]  // Sales Health + Customer Health
+  ]
+
+  const currentPair = healthPairs[currentPairIndex]
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentPairIndex(prev => (prev + 1) % healthPairs.length)
+    }, 4000) // Change pair every 4 seconds
+
+    return () => clearInterval(timer)
+  }, [healthPairs.length])
 
   const sections = [
     {
@@ -943,14 +1069,14 @@ const ProductShowcase = () => {
       id: 'chat',
       title: 'Chat with Lyn',
       subtitle: 'Your personal AI analyst is available 24/7',
-      description: 'Ask complex questions about your business in plain English like "Which ad campaign was most profitable last week?" and get immediate, data-backed answers and suggestions, without ever waiting for a report to be built.',
+      description: 'Ask complex questions about your business like "Which ad campaign was most profitable last week?" and get immediate, data-backed answers and suggestions, without ever waiting for a report to be built.',
       component: <ChatComponent />
     },
     {
       id: 'advisor',
       title: 'Advisor',
-      subtitle: 'We automatically transform the most important "Try this" suggestions into a prioritized weekly to-do list',
-      description: 'Each task is a step-by-step recipe for action, complete with a simulated impact, giving you the confidence to focus your energy where it matters most.',
+      subtitle: 'We automatically transform the most important suggestions into a prioritized weekly to-do list and also advice you on other things',
+      description: 'Each task is a step by step recipe for action, complete with a simulated impact, giving you the confidence to focus your energy where it matters most.',
       component: <ActionPlanComponent />
     }
   ]
@@ -1007,7 +1133,7 @@ const ProductShowcase = () => {
                     <h4 className="text-lg font-bold text-gray-900 mb-2">Quick Insights</h4>
                     <p className="text-sm text-blue-600 font-semibold mb-2">AI-powered business intelligence at your fingertips</p>
                     <p className="text-xs text-gray-600 leading-relaxed">
-                      Every day, our engine proactively finds the hidden opportunities and risks in your data. We then deliver these as simple, plain-English "Insight Cards" that explain what's happening, why it matters, and what you can do about it.
+                      Every day, our engine proactively finds the hidden opportunities and risks in your data. We then deliver these as simple, insight cards that explain what's happening, why it matters, and what you can do about it.
                     </p>
                   </div>
                 </div>
@@ -1023,9 +1149,9 @@ const ProductShowcase = () => {
                 {/* Chat Widget */}
                 <div className="relative p-6">
                   {/* Background Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 rounded-xl"></div>
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-orange-400/20 to-amber-400/20 rounded-full blur-2xl"></div>
-                  <div className="absolute bottom-0 left-0 w-28 h-28 bg-gradient-to-tr from-yellow-400/20 to-orange-400/20 rounded-full blur-2xl"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-fuchsia-50 to-pink-50 rounded-xl"></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-400/20 to-fuchsia-400/20 rounded-full blur-2xl"></div>
+                  <div className="absolute bottom-0 left-0 w-28 h-28 bg-gradient-to-tr from-pink-400/20 to-rose-400/20 rounded-full blur-2xl"></div>
                   
                   {/* Widget Content */}
                   <div className="relative bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden mb-6" style={{ height: '300px' }}>
@@ -1169,9 +1295,9 @@ const ProductShowcase = () => {
                   {/* Advisor Description - Inside Gradient Card */}
                   <div className="relative z-10">
                     <h4 className="text-lg font-bold text-gray-900 mb-2">Advisor</h4>
-                    <p className="text-sm text-blue-600 font-semibold mb-2">We automatically transform the most important "Try this" suggestions into a prioritized weekly to-do list</p>
+                    <p className="text-sm text-blue-600 font-semibold mb-2">We automatically transform the most important suggestions into a prioritized weekly to-do list and also advice you on other things</p>
                     <p className="text-xs text-gray-600 leading-relaxed">
-                      Each task is a step-by-step recipe for action, complete with a simulated impact, giving you the confidence to focus your energy where it matters most.
+                      Each task is a step by step recipe for action, complete with a simulated impact, giving you the confidence to focus your energy where it matters most.
                     </p>
                   </div>
                 </div>
@@ -1182,9 +1308,9 @@ const ProductShowcase = () => {
                 {/* Weekly Business Report Widget */}
                 <div className="relative p-6">
                   {/* Background Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 rounded-xl"></div>
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-2xl"></div>
-                  <div className="absolute bottom-0 left-0 w-28 h-28 bg-gradient-to-tr from-pink-400/20 to-orange-400/20 rounded-full blur-2xl"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-violet-50 rounded-xl"></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-indigo-400/20 rounded-full blur-2xl"></div>
+                  <div className="absolute bottom-0 left-0 w-28 h-28 bg-gradient-to-tr from-violet-400/20 to-purple-400/20 rounded-full blur-2xl"></div>
                   
                   {/* Widget Content */}
                   <div className="relative bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden mb-6" style={{ height: '300px' }}>
@@ -1216,9 +1342,9 @@ const ProductShowcase = () => {
                 {/* Business Health Widget */}
                 <div className="relative p-6">
                   {/* Background Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 rounded-xl"></div>
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-400/20 to-emerald-400/20 rounded-full blur-2xl"></div>
-                  <div className="absolute bottom-0 left-0 w-28 h-28 bg-gradient-to-tr from-teal-400/20 to-cyan-400/20 rounded-full blur-2xl"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-violet-50 rounded-xl"></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-indigo-400/20 rounded-full blur-2xl"></div>
+                  <div className="absolute bottom-0 left-0 w-28 h-28 bg-gradient-to-tr from-violet-400/20 to-purple-400/20 rounded-full blur-2xl"></div>
                   
                   {/* Widget Content */}
                   <div className="relative bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden mb-6" style={{ height: '300px' }}>
@@ -1229,64 +1355,46 @@ const ProductShowcase = () => {
                           <h2 className="text-xs font-semibold bg-gradient-to-r from-red-600 to-red-800 bg-clip-text text-transparent">Business Health</h2>
                         </div>
 
-                        {/* Health Content */}
-                        <div className="flex-1 p-3 bg-white" style={{ height: 'calc(100% - 40px)' }}>
-                          <div className="space-y-3">
-                            {/* Risk Level Circles */}
-                            <div className="flex justify-center space-x-4">
-                              {/* High Risk - Red */}
-                              <div className="flex flex-col items-center">
-                                <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center mb-1">
-                                  <span className="text-white text-xs font-bold">H</span>
-                                </div>
-                                <span className="text-xs text-red-600">High</span>
-                              </div>
-
-                              {/* Medium Risk - Orange */}
-                              <div className="flex flex-col items-center">
-                                <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mb-1">
-                                  <span className="text-white text-xs font-bold">M</span>
-                                </div>
-                                <span className="text-xs text-orange-600">Medium</span>
-                              </div>
-
-                              {/* Low Risk - Green */}
-                              <div className="flex flex-col items-center">
-                                <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mb-1">
-                                  <span className="text-white text-xs font-bold">L</span>
-                                </div>
-                                <span className="text-xs text-green-600">Low</span>
-                              </div>
-                            </div>
-
-                            {/* Health Metrics */}
-                            <div className="space-y-1">
-                              <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                                <span className="text-xs text-gray-600">Financial Health</span>
-                                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                              </div>
-                              <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                                <span className="text-xs text-gray-600">Sales Performance</span>
-                                <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                              </div>
-                              <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                                <span className="text-xs text-gray-600">Marketing ROI</span>
-                                <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                              </div>
-                              <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                                <span className="text-xs text-gray-600">Customer Satisfaction</span>
-                                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                              </div>
-                            </div>
-
-                            {/* Overall Status */}
-                            <div className="mt-2 p-2 bg-green-50 rounded">
-                              <p className="text-xs text-gray-700 text-center">
-                                <strong>Overall:</strong> Good health with some areas needing attention.
-                              </p>
-                            </div>
-                          </div>
-                        </div>
+                         {/* Health Content - Cycling Two Cards Side by Side */}
+                         <div className="flex-1 p-3 bg-white" style={{ height: 'calc(100% - 40px)' }}>
+                           <div className="grid grid-cols-2 gap-3 h-full">
+                             {/* First Card */}
+                             <div className="bg-white border border-gray-200 rounded-lg p-3">
+                               <div className="flex items-center justify-between mb-2">
+                                 <h4 className="text-sm font-semibold text-gray-800">{healthCategories[currentPair[0]].name}</h4>
+                                 <span className={`text-xs font-medium ${healthCategories[currentPair[0]].statusColor} ${healthCategories[currentPair[0]].statusBg} px-2 py-1 rounded`}>
+                                   {healthCategories[currentPair[0]].status}
+                                 </span>
+                               </div>
+                               <div className="space-y-2">
+                                 {healthCategories[currentPair[0]].metrics.map((metric, metricIndex) => (
+                                   <div key={metricIndex} className="flex justify-between items-center">
+                                     <span className="text-xs text-gray-600">{metric.label}</span>
+                                     <span className="text-xs font-medium text-gray-800">{metric.value}</span>
+                                   </div>
+                                 ))}
+                               </div>
+                             </div>
+                             
+                             {/* Second Card */}
+                             <div className="bg-white border border-gray-200 rounded-lg p-3">
+                               <div className="flex items-center justify-between mb-2">
+                                 <h4 className="text-sm font-semibold text-gray-800">{healthCategories[currentPair[1]].name}</h4>
+                                 <span className={`text-xs font-medium ${healthCategories[currentPair[1]].statusColor} ${healthCategories[currentPair[1]].statusBg} px-2 py-1 rounded`}>
+                                   {healthCategories[currentPair[1]].status}
+                                 </span>
+                               </div>
+                               <div className="space-y-2">
+                                 {healthCategories[currentPair[1]].metrics.map((metric, metricIndex) => (
+                                   <div key={metricIndex} className="flex justify-between items-center">
+                                     <span className="text-xs text-gray-600">{metric.label}</span>
+                                     <span className="text-xs font-medium text-gray-800">{metric.value}</span>
+                                   </div>
+                                 ))}
+                               </div>
+                             </div>
+                           </div>
+                         </div>
                       </div>
                     </div>
                   </div>

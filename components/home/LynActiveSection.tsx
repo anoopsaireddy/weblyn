@@ -11,7 +11,7 @@ export default function LynActiveSection() {
     { main: "Monitoring your live ad campaigns...", secondary: "Scanning for unusual changes in your ad metrics." },
     { main: "Reconciling your latest financial data...", secondary: "Ensuring your Shopify sales match your QuickBooks records." },
     { main: "Analyzing recent customer behavior...", secondary: "Looking for patterns in your most valuable customer segments." },
-    { main: "Preparing your next intelligence briefing...", secondary: "I've found some interesting insights I'm getting ready to share." }
+    { main: "Preparing your next steps...", secondary: "I've found some interesting insights I'm getting ready to share." }
   ]
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function LynActiveSection() {
             <span className="gradient-text">Lyn</span> <span className="text-black">is always active</span>
           </h2>
           <p className="zavo-dm-body-large">
-            Your personal AI analyst works 24/7, delivering insights when you need them most
+            Your personal AI analyst works <span className="text-blue-600 font-semibold">24/7</span>, delivering insights when you need them most and you can talk to it in over <span className="text-blue-600 font-semibold">40 languages</span>.
           </p>
         </div>
 
@@ -113,13 +113,13 @@ export default function LynActiveSection() {
                       </div>
                       <h4 className="font-bold text-slate-800 text-sm">Strategic Optimization</h4>
                     </div>
-                    <p className="text-xs text-slate-600">Simulating 1,000+ budget scenarios to find the optimal ad spend allocation.</p>
+                    <p className="text-xs text-slate-600">Simulating budget scenarios to find the optimal ad spend allocation.</p>
                           </div>
                         </div>
 
                 {/* Intelligence Feed */}
                 <div className="border-t border-gray-200/80 pt-3 mt-3">
-                  <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 text-center">Intelligence Feed</h3>
+                  <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 text-center">Feed</h3>
                   <div className="space-y-1">
                     {/* Item 1 */}
                     <div className="flex items-start p-3 rounded-lg cursor-pointer hover:bg-gray-50">
@@ -149,7 +149,7 @@ export default function LynActiveSection() {
                       </div>
                       <div className="flex-1">
                         <p className="font-semibold text-slate-800 text-sm">Heads Up: Ad Spend Anomaly Detected</p>
-                        <p className="text-xs text-slate-600">Your Meta Ads spend is up 50% in the last 24h with no sales increase.</p>
+                        <p className="text-xs text-slate-600">Your Meta Ads spend is up 50% in the last 24 hours with no sales increase.</p>
                         <a href="#" className="text-xs font-semibold text-blue-600 hover:underline mt-1 inline-block">View Insight →</a>
                       </div>
                       <p className="text-xs text-slate-400 font-medium ml-4 flex-shrink-0">15m ago</p>
@@ -166,7 +166,7 @@ export default function LynActiveSection() {
                       </div>
                       <div className="flex-1">
                         <p className="font-semibold text-slate-800 text-sm">Insight: Bestseller May Be Unprofitable</p>
-                        <p className="text-xs text-slate-600">The "Elegant Silk Scarf" is a top seller but its profit margin is low.</p>
+                        <p className="text-xs text-slate-600">The Elegant Silk Scarf is a top seller but its profit margin is low.</p>
                         <a href="#" className="text-xs font-semibold text-blue-600 hover:underline mt-1 inline-block">Go to Insight →</a>
                       </div>
                       <p className="text-xs text-slate-400 font-medium ml-4 flex-shrink-0">2h ago</p>

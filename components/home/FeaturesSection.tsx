@@ -63,7 +63,7 @@ export default function FeaturesSection() {
     {
       title: "Chat with Lyn",
       description:
-        'Your personal AI analyst is available 24/7. Ask complex questions about your business in plain English like "Which ad campaign was most profitable last week?" and get immediate, data-backed answers and suggestions, without ever waiting for a report to be built.',
+        'Your personal AI analyst is available 24/7. Ask complex questions about your business like "Which ad campaign was most profitable last week?" and get immediate, data-backed answers and suggestions, without ever waiting for a report to be built.',
       image: "/weblyn/assets/feature-chat.png",
       gradient: "from-orange-50 via-amber-50 to-yellow-50",
       accentGradient: "from-orange-400 to-amber-500",
@@ -93,7 +93,7 @@ export default function FeaturesSection() {
     {
       title: "Quick Insights",
       description:
-        'Every day, our engine proactively finds the hidden opportunities and risks in your data. We then deliver these as simple, plain-English "Insight Cards" that explain what\'s happening, why it matters, and what you can do about it.',
+        'Every day, our engine proactively finds the hidden opportunities and risks in your data. We then deliver these as simple insight cards that explain what\'s happening, why it matters, and what you can do about it.',
       image: "/weblyn/assets/feature-briefing.png",
       gradient: "from-blue-50 via-indigo-50 to-violet-50",
       accentGradient: "from-blue-400 to-indigo-500",
@@ -103,7 +103,7 @@ export default function FeaturesSection() {
     {
       title: "Weekly Action Plan",
       description:
-        'We automatically transform the most important "Try this" suggestions into a prioritized weekly to-do list. Each task is a step-by-step recipe for action, complete with a simulated impact, giving you the confidence to focus your energy where it matters most.',
+        'We automatically transform the most important Try this suggestions into a prioritized weekly to-do list. Each task is a step-by-step recipe for action, complete with a simulated impact, giving you the confidence to focus your energy where it matters most.',
       image: "/weblyn/assets/feature-plan.png",
       gradient: "from-purple-50 via-fuchsia-50 to-pink-50",
       accentGradient: "from-purple-400 to-fuchsia-500",

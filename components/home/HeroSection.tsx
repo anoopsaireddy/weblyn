@@ -24,7 +24,7 @@ export default function HeroSection() {
 
   const floaterMessages = [
     { l1: "Monitoring your live ad campaigns...", l2: "Scanning for unusual changes in your ad metrics." },
-    { l1: "Preparing your next intelligence briefing...", l2: "I've found some interesting insights I'm getting ready to share." },
+    { l1: "Preparing your next steps...", l2: "I've found some interesting insights I'm getting ready to share." },
     { l1: "Analyzing your sales data...", l2: "Identifying hidden patterns in your customer behavior." },
     { l1: "Running performance diagnostics...", l2: "Evaluating conversion rates and engagement drops." }
   ]
@@ -117,7 +117,7 @@ export default function HeroSection() {
           </div>
           
           <p className="mt-6 max-w-3xl mx-auto text-black text-lg md:text-xl leading-relaxed font-normal font-[var(--font-geist-sans)]">
-            Learns unique context of your business, finds micro-analytic insights that dashboards simply cannot provide, finds leads and advises on how to improve your business.
+            Learns unique context of your business, finds micro-analytic insights that dashboards simply cannot provide and advises on how to improve your business.
           </p>
           <div className="mt-10">
             <form
