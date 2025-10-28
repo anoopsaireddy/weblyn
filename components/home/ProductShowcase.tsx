@@ -1082,14 +1082,14 @@ const ProductShowcase = () => {
   ]
 
   return (
-    <section className="py-20 bg-gradient-to-b from-slate-50 to-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-b from-slate-50 to-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-4 sm:mb-6">
             See <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">Lynlytics</span> in Action
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
             Crystal-clear insights, prioritized actions, and beautiful clarity across your numbers
           </p>
         </div>
@@ -1097,7 +1097,7 @@ const ProductShowcase = () => {
         {/* Quick Insights Full UI Showcase */}
         <div className="space-y-4">
           {/* Section 1: Quick Insights Full Page UI */}
-          <div className="min-h-screen flex flex-col items-center justify-center relative">
+          <div className="min-h-[80vh] sm:min-h-screen flex flex-col items-center justify-center relative">
             {/* Curved Shapes - Extended Beyond Section */}
             <div className="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-br from-blue-400/20 to-indigo-400/20 rounded-full blur-3xl"></div>
             <div className="absolute -bottom-32 -left-32 w-80 h-80 bg-gradient-to-tr from-violet-400/20 to-purple-400/20 rounded-full blur-3xl"></div>
@@ -1118,9 +1118,9 @@ const ProductShowcase = () => {
                 
                 {/* UI Widget Content */}
                 <div className="relative z-10">
-                  {/* Full UI Window Box - Wider and Centered */}
-                  <div className="relative flex justify-center mb-8">
-                    <div className="bg-white border border-gray-200 rounded-xl shadow-xl overflow-hidden" style={{ height: '90vh', minHeight: '700px', width: '95vw', maxWidth: '1400px' }}>
+                  {/* Full UI Window Box - Mobile Responsive */}
+                  <div className="relative flex justify-center mb-6 sm:mb-8">
+                    <div className="bg-white border border-gray-200 rounded-lg sm:rounded-xl shadow-xl overflow-hidden" style={{ height: '90vh', minHeight: '700px', width: '95vw', maxWidth: '1400px' }}>
                       {/* Full Quick Insights UI */}
                       <div className="h-full overflow-hidden">
                         <FullDashboardComponent />
@@ -1129,10 +1129,10 @@ const ProductShowcase = () => {
                   </div>
 
                   {/* Quick Insights Description */}
-                  <div className="relative z-10">
-                    <h4 className="text-lg font-bold text-gray-900 mb-2">Quick Insights</h4>
+                  <div className="relative z-10 px-4">
+                    <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-2">Quick Insights</h4>
                     <p className="text-sm text-blue-600 font-semibold mb-2">AI-powered business intelligence at your fingertips</p>
-                    <p className="text-xs text-gray-600 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                       Every day, our engine proactively finds the hidden opportunities and risks in your data. We then deliver these as simple, insight cards that explain what's happening, why it matters, and what you can do about it.
                     </p>
                   </div>
@@ -1142,19 +1142,19 @@ const ProductShowcase = () => {
           </div>
 
           {/* Chat & Advisor Side by Side Section */}
-          <div className="flex items-center justify-center py-8">
+          <div className="flex items-center justify-center py-6 sm:py-8">
             <div className="w-full max-w-7xl mx-auto">
               {/* Side by Side Widgets */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
                 {/* Chat Widget */}
-                <div className="relative p-6">
+                <div className="relative p-4 sm:p-6">
                   {/* Background Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-fuchsia-50 to-pink-50 rounded-xl"></div>
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-400/20 to-fuchsia-400/20 rounded-full blur-2xl"></div>
-                  <div className="absolute bottom-0 left-0 w-28 h-28 bg-gradient-to-tr from-pink-400/20 to-rose-400/20 rounded-full blur-2xl"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-fuchsia-50 to-pink-50 rounded-lg sm:rounded-xl"></div>
+                  <div className="absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-purple-400/20 to-fuchsia-400/20 rounded-full blur-2xl"></div>
+                  <div className="absolute bottom-0 left-0 w-20 h-20 sm:w-28 sm:h-28 bg-gradient-to-tr from-pink-400/20 to-rose-400/20 rounded-full blur-2xl"></div>
                   
                   {/* Widget Content */}
-                  <div className="relative bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden mb-6" style={{ height: '300px' }}>
+                  <div className="relative bg-white border border-gray-200 rounded-lg sm:rounded-xl shadow-lg overflow-hidden mb-4 sm:mb-6" style={{ height: '250px' }}>
                     <div className="h-full overflow-hidden">
                       <div className="h-full bg-white">
                         {/* Chat Header */}

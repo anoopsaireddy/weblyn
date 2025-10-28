@@ -38,16 +38,16 @@ export default function DashboardsSection() {
   ]
 
   return (
-    <section className="relative py-24 px-4 overflow-hidden">
+    <section className="relative py-12 sm:py-16 md:py-24 px-4 sm:px-6 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-blue-50"></div>
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-orange-400/10 to-pink-400/10 rounded-full blur-3xl"></div>
+      <div className="absolute top-0 right-0 w-64 h-64 sm:w-96 sm:h-96 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-56 h-56 sm:w-80 sm:h-80 bg-gradient-to-tr from-orange-400/10 to-pink-400/10 rounded-full blur-3xl"></div>
       
       <div className="relative max-w-7xl mx-auto">
         {/* Header */}
-        <div className={`text-center mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h2 className="text-5xl md:text-6xl font-bold mb-8">
+        <div className={`text-center mb-12 sm:mb-16 md:mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 leading-tight">
             <span className="bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 bg-clip-text text-transparent">
             Dashboards Don&apos;t Run a
             </span>
@@ -56,7 +56,7 @@ export default function DashboardsSection() {
               Business. Actions Do.
             </span>
           </h2>
-          <p className="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed px-4">
             You&apos;re overloaded with charts that show you what happened, but leave you guessing why. Lynlytics is
             designed to break this cycle. Your AI analyst, Lyn, doesn&apos;t just report on the past; it delivers the
             clarity and direction you need to move your business forward in four key ways:
@@ -64,8 +64,8 @@ export default function DashboardsSection() {
         </div>
 
         {/* Features Container with Gradient Background */}
-        <div className="relative bg-gradient-to-r from-blue-50/60 via-purple-50/40 to-pink-50/30 rounded-2xl p-8 shadow-lg border border-gray-100/50">
-          <div className="space-y-6">
+        <div className="relative bg-gradient-to-r from-blue-50/60 via-purple-50/40 to-pink-50/30 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg border border-gray-100/50">
+          <div className="space-y-4 sm:space-y-6">
             {features.map((feature, index) => (
               <div
                 key={index}
@@ -74,24 +74,24 @@ export default function DashboardsSection() {
                 }`}
               >
                 {/* Simple Text with Line */}
-                <div className="flex items-center gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
                   {/* Icon */}
                   <div className="w-8 h-8 bg-gray-100 rounded-md flex items-center justify-center text-sm flex-shrink-0">
                     {feature.icon}
                   </div>
                   
                   {/* Content */}
-                  <div className="flex items-center gap-3 flex-grow">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 flex-grow">
                     {/* Title */}
-                    <h3 className="text-lg font-semibold text-gray-900 leading-tight tracking-tight w-64">
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 leading-tight tracking-tight sm:w-64">
                       {feature.title}
                     </h3>
                     
                     {/* Separator */}
-                    <span className="text-gray-300">-</span>
+                    <span className="text-gray-300 hidden sm:block">-</span>
                     
                     {/* Description */}
-                    <p className="text-gray-800 leading-relaxed text-base text-left flex-grow">
+                    <p className="text-gray-800 leading-relaxed text-sm sm:text-base text-left flex-grow">
                       {feature.description}
                     </p>
                   </div>
